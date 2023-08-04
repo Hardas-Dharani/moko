@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BottomNavBarController extends GetxController {
@@ -13,6 +14,8 @@ class BottomNavBarController extends GetxController {
     _currentItem = item;
     update();
   }
+
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 }
 
-enum BottomNavigationItem { Home, connection, notification, chat }
+enum BottomNavigationItem { Home, explore, mywishlist, profile }

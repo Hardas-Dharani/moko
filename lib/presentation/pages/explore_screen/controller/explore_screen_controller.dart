@@ -4,7 +4,7 @@ import '../../../../data/repositories/auth_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
-class HomeController extends GetxController {
+class ExploreController extends GetxController {
   TextEditingController emailTxt = TextEditingController();
   TextEditingController passTxt = TextEditingController();
   final passwordVisible = true.obs;
@@ -26,6 +26,7 @@ class HomeController extends GetxController {
   BottomNavigationItem get currentItem => _currentItem;
   var seletectButton = buttonEnum.live;
   DateTime now = DateTime.now();
+  int indexSelected = 0;
   bool hasNewNotification = false;
   String fireStoreId = '';
 

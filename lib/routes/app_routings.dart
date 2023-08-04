@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:moko/presentation/pages/bottom_nav_bar/binding/bottom_nav_bar_binding.dart';
 import 'package:moko/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
+import 'package:moko/presentation/pages/home_screen/binding/home_screen_binding.dart';
+import 'package:moko/presentation/pages/home_screen/controller/home_screen_controller.dart';
+import 'package:moko/presentation/pages/home_screen/widget/live_stream.dart';
 import 'package:moko/presentation/pages/sign_in/binding/sign_in_binding.dart';
 import 'package:moko/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:moko/presentation/pages/sign_up/binding/sign_up_binding.dart';
@@ -26,6 +29,12 @@ class RoutingModule {
       name: Routes.signInScreen,
       page: () => SignInScreen(),
       binding: SignInBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
+      name: Routes.liveStream,
+      page: () => LiveStreamScreen(),
+      binding: HomeBinding(),
       transition: Transition.fadeIn, // Example animation: Fade In
     ),
     GetPage(

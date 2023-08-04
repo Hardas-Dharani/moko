@@ -41,15 +41,18 @@ class CustomTextField extends StatelessWidget {
   final AppPrivateCommandCallback? onAppPrivateCommand;
   final List<TextInputFormatter>? onInputFormattersChanged;
   final VoidCallback? onEditingCompleteAndSubmitted;
-
+  final double borderRadius;
+  final EdgeInsetsGeometry? contentPadding;
   CustomTextField({
     required this.controller,
     this.initialValue,
+    this.contentPadding,
     this.hintText,
     this.prefixIconData,
     this.suffixIconData,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderRadius = 33,
     this.obscureText = false,
     this.autocorrect = true,
     this.enableSuggestions = true,
@@ -93,7 +96,7 @@ class CustomTextField extends StatelessWidget {
       // padding: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(33),
+        borderRadius: BorderRadius.circular(borderRadius),
         color: Colors.transparent,
       ),
       child: TextField(
@@ -134,7 +137,7 @@ class CustomTextField extends StatelessWidget {
         },
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: contentPadding ?? EdgeInsets.all(10),
           hintStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
           border: InputBorder.none,
           prefixIcon: prefixIconData != null

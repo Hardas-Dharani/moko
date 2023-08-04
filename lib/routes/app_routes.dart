@@ -7,4 +7,5 @@ class Routes {
   static String get startScreen => '/StartScreen';
   static String get stats => '/statsScreen';
   static String get statsTable => '/statsTableScreen';
+  static String get liveStream => '/liveStream';
 }
