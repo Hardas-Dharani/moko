@@ -28,7 +28,13 @@ class CustomButton extends StatelessWidget {
       width: width,
       height: height,
       decoration: borderBool
-          ? null
+          ? gradient == null
+              ? null
+              : BoxDecoration(
+                  gradient: gradient,
+                  borderRadius: borderRadius ??
+                      const BorderRadius.all(Radius.circular(33)),
+                )
           : BoxDecoration(
               border: Border.all(color: AppColors.white),
               borderRadius:

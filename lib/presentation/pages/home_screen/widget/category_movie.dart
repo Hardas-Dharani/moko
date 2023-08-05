@@ -7,7 +7,7 @@ import '../../../../app/util/movie_card.dart';
 
 class CategorySection extends StatelessWidget {
   final String category;
-  final List<String> movies;
+  final List<Map<String, dynamic>> movies;
   final bool showTitle;
   CategorySection(
       {required this.category, this.showTitle = true, required this.movies});
@@ -17,6 +17,10 @@ class CategorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (showTitle)
+          SizedBox(
+            height: 10,
+          ),
         if (showTitle)
           GestureDetector(
             onTap: () {
@@ -34,7 +38,7 @@ class CategorySection extends StatelessWidget {
             ),
           ),
         SizedBox(
-          height: 10,
+          height: 15,
         ),
         Container(
           height: 200, // Adjust the height as needed
@@ -43,13 +47,11 @@ class CategorySection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,
             itemBuilder: (context, movieIndex) {
-              String movieTitle = movies[movieIndex];
+              Map<String, dynamic> movieTitle = movies[movieIndex];
               return MovieCard(
-                titleBool: !showTitle,
-                title: movieTitle,
-                imageUrl:
-                    "https://lumiere-a.akamaihd.net/v1/images/p_shangchiandthelegendofthetenringshomeentupdate_22055_7b62fa67.jpeg?region=0%2C0%2C540%2C810",
-              );
+                  titleBool: !showTitle,
+                  title: movieTitle['title'],
+                  imageUrl: movieTitle['imageUrl']);
             },
           ),
         ),

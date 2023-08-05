@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/presentation/pages/home_screen/widget/category_movie.dart';
+
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/movie_card.dart';
+import '../../../app/util/util.dart';
 import 'controller/home_screen_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
-  final List<String> categories = [
-    'Popular Shows',
-    'Upcoming Shows',
-    'Popular Shows',
-    'Sci-Fi',
-  ];
 
-  final Map<String, List<String>> moviesByCategory = {
-    'Popular Shows': ['Movie 1', 'Movie 2', 'Movie 3'],
-    'Upcoming Shows': ['Movie 4', 'Movie 5', 'Movie 6'],
-    // ignore: equal_keys_in_map
-    'Popular Shows': ['Movie 7', 'Movie 8', 'Movie 9'],
-    'Sci-Fi': ['Movie 10', 'Movie 11', 'Movie 12'],
-  };
-  List<String> movie = ['Movie 1', 'Movie 2', 'Movie 3'];
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
@@ -41,17 +29,14 @@ class HomeScreen extends GetView<HomeController> {
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: movie.length,
+                itemCount: movieList.length,
                 itemBuilder: (context, movieIndex) {
-                  String movieTitle = movie[movieIndex];
                   return MovieCard(
-                    width: 185,
-                    height: 236,
-                    radius: 6,
-                    title: movieTitle,
-                    imageUrl:
-                        "https://lumiere-a.akamaihd.net/v1/images/p_shangchiandthelegendofthetenringshomeentupdate_22055_7b62fa67.jpeg?region=0%2C0%2C540%2C810",
-                  );
+                      width: 185,
+                      height: 236,
+                      radius: 6,
+                      title: movieList[movieIndex]["title"],
+                      imageUrl: movieList[movieIndex]["imageUrl"]);
                 },
               ),
             ),
@@ -64,7 +49,8 @@ class HomeScreen extends GetView<HomeController> {
                 itemCount: categories.length,
                 itemBuilder: (context, categoryIndex) {
                   String category = categories[categoryIndex];
-                  List<String> movies = moviesByCategory[category] ?? [];
+                  List<Map<String, dynamic>> movies =
+                      moviesByCategory[category] ?? [];
 
                   return CategorySection(category: category, movies: movies);
                 },

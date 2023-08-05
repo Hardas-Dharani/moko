@@ -7,11 +7,10 @@ import '../../../app/util/common_txt.dart';
 import '../../../app/util/custom_button.dart';
 import '../../../app/util/custom_txt_field.dart';
 import '../../../app/util/util.dart';
-import 'controller/explore_screen_controller.dart';
+import '../explore_screen/controller/explore_screen_controller.dart';
 
 class ExploreScreen extends GetView<ExploreController> {
   List<String> movie = ['Movie 1', 'Movie 2', 'Movie 3'];
-
   List<String> buttonString = ['Horror', 'Action', 'Drama', 'Romance'];
   ExploreScreen({super.key});
   @override

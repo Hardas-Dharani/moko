@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/app/util/util.dart';
+
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/common_txt.dart';
 import '../../../app/util/custom_button.dart';
@@ -137,7 +138,9 @@ class SignUpScreen extends GetView<SignupController> {
             backGroundColor: AppColors.pinkColor,
             gradient: LinearGradient(
                 colors: [AppColors.pinkColor, AppColors.pinkColor]),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.bottomBar);
+            },
             child: Text(
               'Sign Up',
               style: TextStyle(fontSize: 16),

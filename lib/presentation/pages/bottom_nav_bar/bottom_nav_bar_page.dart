@@ -1,13 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/app/config/app_colors.dart';
-import 'package:moko/app/util/common_txt.dart';
 import 'package:moko/presentation/pages/explore_screen/explore_screen_page.dart';
+
 import '../../../app/util/util.dart';
-import '../edit_profile_screen/edit_profile_screen_page.dart';
+import '../dashboard_screen/dashboard_screen_page.dart';
 import '../home_screen/home_screen_page.dart';
+import '../home_screen/widget/live_stream.dart';
+import '../watch_list_screen/watch_lst_screen_page.dart';
 import 'controller/bottom_nav_bar_controller.dart';
 
 class BottomNavBarScreen extends GetView<BottomNavBarController> {
@@ -28,6 +28,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border))
           ],
+          centerTitle: true,
           title: Image.asset(
             Utils.getImagePath("logo"),
             width: 108,
@@ -151,32 +152,33 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                       ),
                     ],
                   )),
-              for (Map<String, dynamic> drawerItem in [
-                {'label': 'Home', 'icon': Icons.home_outlined},
-                {'label': 'My Wish Lists', 'icon': Icons.list},
-                {'label': 'TV Shows', 'icon': Icons.tv},
-                {'label': 'Movies', 'icon': Icons.movie},
-                {'label': 'Live Streaming Profile', 'icon': Icons.live_tv},
-                {'label': 'Settings', 'icon': Icons.settings},
-                {'label': 'Sign Out', 'icon': Icons.logout},
-              ])
-                ListTile(
-                  leading: Icon(
-                    drawerItem['icon'],
-                    color: AppColors.white,
-                  ),
-                  title: Text(
-                    drawerItem['label'],
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                  onTap: () {
-                    // Handle onTap action for each drawer item
-                    Navigator.pop(context);
-                  },
-                ),
+              ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => ListTile(
+                        leading: Icon(
+                          controller.drawerItem[index]['icon'],
+                          color: AppColors.white,
+                        ),
+                        title: Text(
+                          controller.drawerItem[index]['label'],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                        onTap: () {
+                          Get.back();
+                          if (controller.drawerItem[index]['label'] ==
+                              "Live Streaming Profile") {
+                            Get.to(LiveStreamScreen());
+                          }
+                        },
+                      ),
+                  padding: EdgeInsets.only(left: 10),
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 10,
+                      ),
+                  itemCount: controller.drawerItem.length)
             ],
           ),
         ),
@@ -194,10 +196,10 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
         return ExploreScreen();
       case BottomNavigationItem.mywishlist:
         // controller.hasNewNotification = false;
-        return Screen3();
+        return WatchListScreen();
       case BottomNavigationItem.profile:
         // Get.put(ChatController());
-        return EditProfileScreen();
+        return DashBoardScreen();
 
       default:
         return Container();

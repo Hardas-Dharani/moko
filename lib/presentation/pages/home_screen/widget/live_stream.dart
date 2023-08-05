@@ -10,21 +10,6 @@ import 'category_movie.dart';
 
 class LiveStreamScreen extends GetView<HomeController> {
   LiveStreamScreen({super.key});
-  final List<String> categories = [
-    'Popular Shows',
-    'Upcoming Shows',
-    'Popular Shows',
-    'Sci-Fi',
-  ];
-
-  final Map<String, List<String>> moviesByCategory = {
-    'Popular Shows': ['Movie 1', 'Movie 2', 'Movie 3'],
-    'Upcoming Shows': ['Movie 4', 'Movie 5', 'Movie 6'],
-    // ignore: equal_keys_in_map
-    'Popular Shows': ['Movie 7', 'Movie 8', 'Movie 9'],
-    'Sci-Fi': ['Movie 10', 'Movie 11', 'Movie 12'],
-  };
-  List<String> movie = ['Movie 1', 'Movie 2', 'Movie 3'];
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
@@ -32,6 +17,11 @@ class LiveStreamScreen extends GetView<HomeController> {
       appBar: PreferredSize(
         preferredSize: Size(Get.width, 66),
         child: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back_ios)),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border))
           ],
@@ -136,7 +126,7 @@ class LiveStreamScreen extends GetView<HomeController> {
                         itemCount: categories.length,
                         itemBuilder: (context, categoryIndex) {
                           String category = categories[categoryIndex];
-                          List<String> movies =
+                          List<Map<String, dynamic>> movies =
                               moviesByCategory[category] ?? [];
 
                           return CategorySection(

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import '../../../app/config/app_colors.dart';
-import '../../../app/extensions/color.dart';
 import '../../../app/util/common_txt.dart';
 import '../../../app/util/custom_button.dart';
-import '../../../app/util/gradient_button.dart';
 import '../../../app/util/scaffold_widget.dart';
 import '../../../app/util/util.dart';
 import '../../../routes/app_routes.dart';
@@ -53,7 +51,7 @@ class StartPage extends StatelessWidget {
             CustomButton(
               height: 40,
               onPressed: () {
-                Get.toNamed(Routes.signInScreen);
+                Get.toNamed(Routes.signUpScreen);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +74,7 @@ class StartPage extends StatelessWidget {
             CustomButton(
               height: 40,
               onPressed: () {
-                Get.toNamed(Routes.signInScreen);
+                Get.toNamed(Routes.bottomBar);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -99,7 +97,7 @@ class StartPage extends StatelessWidget {
             CustomButton(
               height: 40,
               onPressed: () {
-                Get.toNamed(Routes.signInScreen);
+                Get.toNamed(Routes.bottomBar);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +119,7 @@ class StartPage extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                Get.toNamed(Routes.signInScreen);
+                Get.toNamed(Routes.bottomBar);
               },
               height: 40,
               child: Row(
@@ -170,7 +168,9 @@ class StartPage extends StatelessWidget {
               backGroundColor: AppColors.pinkColor,
               gradient: LinearGradient(
                   colors: [AppColors.pinkColor, AppColors.pinkColor]),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.signInScreen);
+              },
               child: Text(
                 'Sign In',
                 style: TextStyle(fontSize: 16),
@@ -189,7 +189,7 @@ class StartPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(Routes.signInScreen);
+                    Get.toNamed(Routes.signUpScreen);
                   },
                   child: CommonText(
                     text: "Sign up",

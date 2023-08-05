@@ -133,7 +133,9 @@ class SignInScreen extends GetView<SignInController> {
             backGroundColor: AppColors.pinkColor,
             gradient: LinearGradient(
                 colors: [AppColors.pinkColor, AppColors.pinkColor]),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.bottomBar);
+            },
             child: Text(
               'Sign In',
               style: TextStyle(fontSize: 16),
