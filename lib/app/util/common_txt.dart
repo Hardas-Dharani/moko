@@ -31,6 +31,7 @@ class CommonText extends StatelessWidget {
       style: TextStyle(
         color: color ?? AppColors.black,
         fontWeight: weight,
+        
         overflow: overFlow,
         fontSize: fontSize,
         height: lineHeight,
