@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:moko/presentation/pages/home_screen/widget/category_movie.dart';
 
 import '../../../app/config/app_colors.dart';
-import '../../../app/util/movie_card.dart';
 import '../../../app/util/util.dart';
 import 'controller/home_screen_controller.dart';
 
@@ -18,28 +17,28 @@ class HomeScreen extends GetView<HomeController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              // color: AppColors.blue,
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              height: 236, // Adjust the height as needed
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // Container(
+            //   // color: AppColors.blue,
+            //   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            //   height: 236, // Adjust the height as needed
 
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: movieList.length,
-                itemBuilder: (context, movieIndex) {
-                  return MovieCard(
-                      width: 185,
-                      height: 236,
-                      radius: 6,
-                      title: movieList[movieIndex]["title"],
-                      imageUrl: movieList[movieIndex]["imageUrl"]);
-                },
-              ),
-            ),
+            //   child: ListView.builder(
+            //     shrinkWrap: true,
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: movieList.length,
+            //     itemBuilder: (context, movieIndex) {
+            //       return MovieCard(
+            //           width: 185,
+            //           height: 236,
+            //           radius: 6,
+            //           title: movieList[movieIndex]["title"],
+            //           imageUrl: movieList[movieIndex]["imageUrl"]);
+            //     },
+            //   ),
+            // ),
             Container(
               color: AppColors.black,
               child: ListView.builder(

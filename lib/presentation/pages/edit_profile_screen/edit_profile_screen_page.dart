@@ -13,31 +13,31 @@ class EditProfileScreen extends GetView<EditProfileController> {
   Widget build(BuildContext context) {
     Get.put(EditProfileController());
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(Get.width, 66),
-        child: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back_ios)),
-          title: CommonText(
-            text: "Profile",
-            weight: FontWeight.bold,
-            color: AppColors.white,
-            fontSize: 24,
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [AppColors.pinkColor, AppColors.lightPurple],
-              ),
-            ),
-          ),
-        ),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size(Get.width, 66),
+      //   child: AppBar(
+      //     leading: IconButton(
+      //         onPressed: () {
+      //           Get.back();
+      //         },
+      //         icon: Icon(Icons.arrow_back_ios)),
+      //     title: CommonText(
+      //       text: "Profile",
+      //       weight: FontWeight.bold,
+      //       color: AppColors.white,
+      //       fontSize: 24,
+      //     ),
+      //     flexibleSpace: Container(
+      //       decoration: BoxDecoration(
+      //         gradient: LinearGradient(
+      //           begin: Alignment.centerLeft,
+      //           end: Alignment.centerRight,
+      //           colors: [AppColors.pinkColor, AppColors.lightPurple],
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       backgroundColor: AppColors.black.withOpacity(0.9),
 
       // backgroundColor: AppColors.lightPurple.withOpacity(0.9),

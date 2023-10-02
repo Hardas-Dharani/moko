@@ -21,7 +21,7 @@ class RoutingModule {
   List<GetPage> routingList = [
     GetPage(
       name: Routes.splashScreen,
-      page: () => SplashScreen(),
+      page:() => SplashScreen(),
       // binding: SplashBinding(),
       transition: Transition.fadeIn, // Example animation: Fade In
     ),

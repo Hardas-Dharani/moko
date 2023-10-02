@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/app/util/util.dart';
+
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/common_txt.dart';
 import '../../../app/util/custom_button.dart';
@@ -45,8 +46,8 @@ class SignInScreen extends GetView<SignInController> {
 
           CustomTextField(
             height: 40,
-            controller: TextEditingController(),
-            hintText: 'info@yourdomain.com',
+            controller: controller.emailTxt,
+            hintText: 'john@example.com',
             prefixIcon: Image.asset(Utils.getImagePath("mail_icon")),
             // suffixIconData: Icons.clear,
             obscureText: false,
@@ -63,7 +64,7 @@ class SignInScreen extends GetView<SignInController> {
           ),
           CustomTextField(
             height: 40,
-            controller: TextEditingController(),
+            controller: controller.passTxt,
             hintText: 'Password',
             prefixIcon: Image.asset(Utils.getImagePath("lock_icon")),
 
@@ -133,8 +134,8 @@ class SignInScreen extends GetView<SignInController> {
             backGroundColor: AppColors.pinkColor,
             gradient: LinearGradient(
                 colors: [AppColors.pinkColor, AppColors.pinkColor]),
-            onPressed: () {
-              Get.toNamed(Routes.bottomBar);
+            onPressed: () async {
+              controller.login();
             },
             child: Text(
               'Sign In',
@@ -142,7 +143,7 @@ class SignInScreen extends GetView<SignInController> {
             ),
           ),
           SizedBox(
-            height: Get.height * 0.07,
+            height: Get.height * 0.05,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -150,7 +151,8 @@ class SignInScreen extends GetView<SignInController> {
               CommonText(
                 text: "Don't have an account? ",
                 color: AppColors.white,
-                fontSize: 12,
+                fontSize: 14,
+                weight: FontWeight.bold,
               ),
               GestureDetector(
                 onTap: () {
@@ -159,7 +161,8 @@ class SignInScreen extends GetView<SignInController> {
                 child: CommonText(
                   text: "Sign Up",
                   color: AppColors.blue,
-                  fontSize: 12,
+                  fontSize: 14,
+                  weight: FontWeight.bold,
                 ),
               ),
             ],

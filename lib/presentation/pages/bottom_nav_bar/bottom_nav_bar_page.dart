@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/app/config/app_colors.dart';
+import 'package:moko/app/services/local_storage.dart';
 import 'package:moko/presentation/pages/explore_screen/explore_screen_page.dart';
 
 import '../../../app/util/util.dart';
-import '../dashboard_screen/dashboard_screen_page.dart';
+import '../edit_profile_screen/controller/edit_profile_screen_controller.dart';
+import '../edit_profile_screen/edit_profile_screen_page.dart';
 import '../home_screen/home_screen_page.dart';
 import '../home_screen/widget/live_stream.dart';
 import '../watch_list_screen/watch_lst_screen_page.dart';
@@ -91,7 +93,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                               icon: Icon(Icons.home_outlined),
                             ),
                             BottomNavigationBarItem(
-                              label: 'EXPLORE',
+                              label: 'Creater',
                               icon: Icon(Icons.search_outlined),
                             ),
                             BottomNavigationBarItem(
@@ -120,18 +122,18 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
             .copyWith(canvasColor: AppColors.black.withOpacity(0.2)),
         child: Drawer(
           child: ListView(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.only(bottom: 30),
             children: <Widget>[
               DrawerHeader(
                   decoration:
                       BoxDecoration(color: AppColors.black.withOpacity(0.5)),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzF7xJ5l0YlkeFb-85hvKDGbnBMprT8P8HL5t-ctDH&s'),
-                      ),
+                      // CircleAvatar(
+                      //   radius: 40,
+                      //   backgroundImage: NetworkImage(
+                      //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzF7xJ5l0YlkeFb-85hvKDGbnBMprT8P8HL5t-ctDH&s'),
+                      // ),
                       SizedBox(
                         width: 20,
                       ),
@@ -140,12 +142,20 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'John Doe',
+                            Get.find<LocalStorageService>()
+                                .loginUser!
+                                .data!
+                                .user!
+                                .name!,
                             style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(height: 4),
                           Text(
-                            'john.doe@example.com',
+                            Get.find<LocalStorageService>()
+                                .loginUser!
+                                .data!
+                                .user!
+                                .email!,
                             style: TextStyle(color: Colors.white),
                           ),
                         ],
@@ -153,27 +163,73 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                     ],
                   )),
               ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => ListTile(
-                        leading: Icon(
-                          controller.drawerItem[index]['icon'],
-                          color: AppColors.white,
-                        ),
-                        title: Text(
-                          controller.drawerItem[index]['label'],
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
+                  itemBuilder: (context, index) => controller.drawerItem[index]
+                              ['label'] ==
+                          "Creater"
+                      ? ExpansionTile(
+                          title: Text(
+                            controller.drawerItem[index]['label'],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
                           ),
+                          childrenPadding: EdgeInsets.only(left: 80, top: 0),
+                          leading: Icon(
+                            controller.drawerItem[index]['icon'],
+                            color: AppColors.white,
+                          ),
+                          expandedAlignment: Alignment.topCenter,
+                          expandedCrossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            controller.createrListMenuModel.data == null
+                                ? CircularProgressIndicator()
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.zero,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) => Text(
+                                          controller.createrListMenuModel.data!
+                                              .creators![index].genreName!,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                    itemCount: controller.createrListMenuModel
+                                        .data!.creators!.length)
+                          ],
+                        )
+                      : ListTile(
+                          leading: Icon(
+                            controller.drawerItem[index]['icon'],
+                            color: AppColors.white,
+                          ),
+                          title: Text(
+                            controller.drawerItem[index]['label'],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          onTap: () {
+                            Get.back();
+                            if (controller.drawerItem[index]['label'] ==
+                                "Live Streaming Profile") {
+                              Get.to(LiveStreamScreen());
+                            }
+                            // else if (controller.drawerItem[index]['label'] ==
+                            //     "Creater") {
+                            //   Get.to(ExploreScreen());
+                            // }
+                          },
                         ),
-                        onTap: () {
-                          Get.back();
-                          if (controller.drawerItem[index]['label'] ==
-                              "Live Streaming Profile") {
-                            Get.to(LiveStreamScreen());
-                          }
-                        },
-                      ),
                   padding: EdgeInsets.only(left: 10),
                   separatorBuilder: (context, index) => SizedBox(
                         height: 10,
@@ -198,61 +254,11 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
         // controller.hasNewNotification = false;
         return WatchListScreen();
       case BottomNavigationItem.profile:
-        // Get.put(ChatController());
-        return DashBoardScreen();
+        Get.put(EditProfileController());
+        return EditProfileScreen();
 
       default:
         return Container();
     }
-  }
-}
-
-// Rest of the screen widgets remain the same
-
-class Screen1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Center(
-        child: Text('Screen 1', style: TextStyle(fontSize: 24)),
-      ),
-    );
-  }
-}
-
-class Screen2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Center(
-        child: Text('Screen 2', style: TextStyle(fontSize: 24)),
-      ),
-    );
-  }
-}
-
-class Screen3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Center(
-        child: Text('Screen 3', style: TextStyle(fontSize: 24)),
-      ),
-    );
-  }
-}
-
-class Screen4 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Center(
-        child: Text('Screen 4', style: TextStyle(fontSize: 24)),
-      ),
-    );
   }
 }

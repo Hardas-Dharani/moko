@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/repositories/auth_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
@@ -25,8 +24,8 @@ class MovieDetailController extends GetxController {
 
   login() async {
     try {
-      authModal = await AuthenticationRepositoryIml()
-          .signIn(emailTxt.text, passTxt.text);
+      // authModal = await AuthenticationRepositoryIml()
+      //     .signIn(emailTxt.text, passTxt.text);
 
       update();
     } catch (e) {

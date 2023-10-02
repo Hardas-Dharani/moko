@@ -1,5 +1,7 @@
-import '../entities/auth_model.dart';
+import '../../data/models/login_model.dart';
 
 abstract class AuthenticationRepository {
-  Future<AuthModal> signIn(String username, String password);
+  Future<LoginModel> signIn(String username, String password);
+  Future<LoginModel> signUp(
+      String username, String password, String email, String userType);
 }
