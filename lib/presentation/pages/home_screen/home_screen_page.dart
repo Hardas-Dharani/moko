@@ -15,51 +15,61 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: AppColors.black.withOpacity(0.9),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // SizedBox(
-            //   height: 20,
-            // ),
-            // Container(
-            //   // color: AppColors.blue,
-            //   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            //   height: 236, // Adjust the height as needed
+        child: GetBuilder<HomeController>(builder: (_) {
+          return Column(
+            children: [
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // Container(
+              //   // color: AppColors.blue,
+              //   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              //   height: 236, // Adjust the height as needed
 
-            //   child: ListView.builder(
-            //     shrinkWrap: true,
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: movieList.length,
-            //     itemBuilder: (context, movieIndex) {
-            //       return MovieCard(
-            //           width: 185,
-            //           height: 236,
-            //           radius: 6,
-            //           title: movieList[movieIndex]["title"],
-            //           imageUrl: movieList[movieIndex]["imageUrl"]);
-            //     },
-            //   ),
-            // ),
-            Container(
-              color: AppColors.black,
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-                itemCount: categories.length,
-                itemBuilder: (context, categoryIndex) {
-                  String category = categories[categoryIndex];
-                  List<Map<String, dynamic>> movies =
-                      moviesByCategory[category] ?? [];
+              //   child: ListView.builder(
+              //     shrinkWrap: true,
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: movieList.length,
+              //     itemBuilder: (context, movieIndex) {
+              //       return MovieCard(
+              //           width: 185,
+              //           height: 236,
+              //           radius: 6,
+              //           title: movieList[movieIndex]["title"],
+              //           imageUrl: movieList[movieIndex]["imageUrl"]);
+              //     },
+              //   ),
+              // ),
+              controller.homeDetailData.data == null
+                  ? SizedBox()
+                  : Container(
+                      color: AppColors.black,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                        itemCount: controller
+                            .homeDetailData.data!.sliderByGenres!.length,
+                        itemBuilder: (context, categoryIndex) {
+                          String category = controller.homeDetailData.data!
+                              .sliderByGenres![categoryIndex].genreName!;
+                          List<Map<String, dynamic>> movies =
+                              moviesByCategory[category] ?? [];
 
-                  return CategorySection(category: category, movies: movies);
-                },
+                          return CategorySection(
+                              category: category,
+                              sliderByGenres: controller.homeDetailData.data!
+                                  .sliderByGenres![categoryIndex]);
+                        },
+                      ),
+                    ),
+              SizedBox(
+                height: 100,
               ),
-            ),
-            SizedBox(
-              height: 100,
-            ),
-          ],
-        ),
+            ],
+          );
+        }),
       ),
     );
   }

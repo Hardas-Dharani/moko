@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moko/data/models/home_detail_model.dart';
 import 'package:moko/presentation/pages/home_screen/widget/live_stream.dart';
 
 import '../../../../app/config/app_colors.dart';
@@ -7,10 +8,13 @@ import '../../../../app/util/movie_card.dart';
 
 class CategorySection extends StatelessWidget {
   final String category;
-  final List<Map<String, dynamic>> movies;
+  final SliderByGenres sliderByGenres;
+  // final List<Map<String, dynamic>> movies;
   final bool showTitle;
   CategorySection(
-      {required this.category, this.showTitle = true, required this.movies});
+      {required this.category,
+      this.showTitle = true,
+      required this.sliderByGenres});
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +49,16 @@ class CategorySection extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: movies.length,
+            itemCount: sliderByGenres.slider!.length,
             itemBuilder: (context, movieIndex) {
-              Map<String, dynamic> movieTitle = movies[movieIndex];
+              // Map<String, dynamic> movieTitle = movies[movieIndex];
               return MovieCard(
                   titleBool: !showTitle,
-                  title: movieTitle['title'],
-                  imageUrl: movieTitle['imageUrl']);
+                  title: sliderByGenres.slider![movieIndex].seriesName!,
+                  imageUrl: sliderByGenres.slider![movieIndex].seriesPoster! !=
+                          ""
+                      ? sliderByGenres.slider![movieIndex].seriesPoster!
+                      : "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg");
             },
           ),
         ),

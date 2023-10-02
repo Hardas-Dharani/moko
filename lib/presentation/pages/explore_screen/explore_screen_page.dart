@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moko/presentation/pages/home_screen/widget/category_movie.dart';
 
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/common_txt.dart';
 import '../../../app/util/custom_button.dart';
 import '../../../app/util/custom_txt_field.dart';
 import '../../../app/util/util.dart';
+import '../home_screen/widget/category_movie.dart';
 import 'controller/explore_screen_controller.dart';
 
 class ExploreScreen extends GetView<ExploreController> {
@@ -132,7 +132,7 @@ class ExploreScreen extends GetView<ExploreController> {
                           return CategorySection(
                               showTitle: false,
                               category: category,
-                              movies: movies);
+                              sliderByGenres: movies);
                         },
                       ),
                     ],

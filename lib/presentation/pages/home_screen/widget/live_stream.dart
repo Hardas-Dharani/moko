@@ -114,28 +114,36 @@ class LiveStreamScreen extends GetView<HomeController> {
                             )),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      color: AppColors.black,
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(
-                          height: 20,
-                        ),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: categories.length,
-                        itemBuilder: (context, categoryIndex) {
-                          String category = categories[categoryIndex];
-                          List<Map<String, dynamic>> movies =
-                              moviesByCategory[category] ?? [];
+                    controller.homeDetailData.data == null
+                        ? SizedBox()
+                        : Container(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            color: AppColors.black,
+                            child: ListView.separated(
+                              separatorBuilder: (context, index) => SizedBox(
+                                height: 20,
+                              ),
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: controller
+                                  .homeDetailData.data!.sliderByGenres!.length,
+                              itemBuilder: (context, categoryIndex) {
+                                String category = controller
+                                    .homeDetailData
+                                    .data!
+                                    .sliderByGenres![categoryIndex]
+                                    .genreName!;
+                                List<Map<String, dynamic>> movies =
+                                    moviesByCategory[category] ?? [];
 
-                          return CategorySection(
-                              showTitle: false,
-                              category: category,
-                              movies: movies);
-                        },
-                      ),
-                    ),
+                                return CategorySection(
+                                    showTitle: false,
+                                    category: category,
+                                    sliderByGenres: controller.homeDetailData
+                                        .data!.sliderByGenres![categoryIndex]);
+                              },
+                            ),
+                          ),
                   ],
                 ),
               ),
