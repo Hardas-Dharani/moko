@@ -2,20 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../app/config/app_colors.dart';
+import '../../../app/util/common_txt.dart';
+import '../../../app/util/custom_button.dart';
 import '../../../app/util/custom_txt_field.dart';
 import '../../../app/util/util.dart';
 import '../home_screen/widget/category_movie.dart';
-import 'controller/explore_screen_controller.dart';
+import 'controller/creater_screen_controller.dart';
 
-class ExploreScreen extends GetView<ExploreController> {
+// ignore: must_be_immutable
+class CreaterScreen extends GetView<CreaterController> {
   List<String> movie = ['Movie 1', 'Movie 2', 'Movie 3'];
 
   List<String> buttonString = ['Horror', 'Action', 'Drama', 'Romance'];
-  ExploreScreen({super.key});
+  CreaterScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    Get.put(ExploreController());
+    Get.put(CreaterController());
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size(Get.width, 66),
+        child: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+          title: CommonText(
+            text: "Creater",
+            weight: FontWeight.bold,
+            color: AppColors.white,
+            fontSize: 24,
+          ),
+          centerTitle: false,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [AppColors.pinkColor, AppColors.lightPurple],
+              ),
+            ),
+          ),
+        ),
+      ),
+
       // backgroundColor: AppColors.lightPurple.withOpacity(0.9),
       body: Container(
         decoration: BoxDecoration(
@@ -32,11 +62,10 @@ class ExploreScreen extends GetView<ExploreController> {
         ),
         child: Stack(
           children: [
-            GetBuilder<ExploreController>(builder: (_) {
+            GetBuilder<CreaterController>(builder: (_) {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
                   child: Column(
                     children: [
                       SizedBox(
@@ -80,40 +109,45 @@ class ExploreScreen extends GetView<ExploreController> {
                           )
                         ],
                       ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // SizedBox(
-                      //   height: 40,
-                      //   child: ListView.separated(
-                      //       shrinkWrap: true,
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemBuilder: (context, index) {
-                      //         return CustomButton(
-                      //             borderBool: true,
-                      //             width: 97,
-                      //             height: 40,
-                      //             borderRadius: BorderRadius.circular(35),
-                      //             backGroundColor:
-                      //                 controller.indexSelected == index
-                      //                     ? AppColors.blue
-                      //                     : AppColors.pinkColor,
-                      //             onPressed: () {
-                      //               controller.indexSelected = index;
-                      //               controller.update();
-                      //             },
-                      //             child: CommonText(
-                      //               text: buttonString[index],
-                      //               fontSize: 12,
-                      //               color: AppColors.white,
-                      //             ));
-                      //       },
-                      //       separatorBuilder: (context, index) => SizedBox(
-                      //             width: 10,
-                      //           ),
-                      //       itemCount: buttonString.length),
-                      // ),
-
+                      SizedBox(
+                        height: 20,
+                      ),
+                      controller.homeDetailData.data == null
+                          ? SizedBox()
+                          : SizedBox(
+                              height: 40,
+                              child: ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return CustomButton(
+                                        borderBool: true,
+                                        width: 97,
+                                        height: 40,
+                                        borderRadius: BorderRadius.circular(35),
+                                        backGroundColor:
+                                            controller.indexSelected == index
+                                                ? AppColors.blue
+                                                : AppColors.pinkColor,
+                                        onPressed: () {
+                                          controller.indexSelected = index;
+                                          controller.update();
+                                        },
+                                        child: CommonText(
+                                          text: controller.homeDetailData.data!
+                                              .creators![index].genreName!,
+                                          fontSize: 12,
+                                          color: AppColors.white,
+                                        ));
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                  itemCount: controller
+                                      .homeDetailData.data!.creators!.length),
+                            ),
                       SizedBox(
                         height: 20,
                       ),
@@ -122,37 +156,32 @@ class ExploreScreen extends GetView<ExploreController> {
                               height: Get.height,
                             )
                           : SizedBox(
-                              height: Get.height / 1.3,
+                              height: Get.height,
                               child: ListView.separated(
                                 separatorBuilder: (context, index) => SizedBox(
                                   height: 20,
                                 ),
                                 shrinkWrap: true,
-                                padding: EdgeInsets.only(bottom: 100),
-                                // physics: NeverScrollableScrollPhysics(),
-                                itemCount: controller.homeDetailData.data!
-                                    .sliderByGenres!.length,
+                                padding: EdgeInsets.zero,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: controller
+                                    .homeDetailData.data!.creators!.length,
                                 itemBuilder: (context, categoryIndex) {
                                   String category = controller
                                       .homeDetailData
                                       .data!
-                                      .sliderByGenres![categoryIndex]
+                                      .creators![categoryIndex]
                                       .genreName!;
                                   List<Map<String, dynamic>> movies =
                                       moviesByCategory[category] ?? [];
 
                                   return CategorySection(
                                       category: category,
-                                      sliderByGenres: controller
-                                          .homeDetailData
-                                          .data!
-                                          .sliderByGenres![categoryIndex]);
+                                      sliderByGenres: controller.homeDetailData
+                                          .data!.creators![categoryIndex]);
                                 },
                               ),
                             ),
-                      // SizedBox(
-                      //   height: 60,
-                      // ),
                     ],
                   ),
                 ),

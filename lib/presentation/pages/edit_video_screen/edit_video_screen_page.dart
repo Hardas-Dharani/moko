@@ -4,43 +4,44 @@ import 'package:moko/app/util/common_txt.dart';
 
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/custom_button.dart';
-import 'controller/edit_profile_screen_controller.dart';
+import 'controller/edit_video_screen_controller.dart';
 
-class EditProfileScreen extends GetView<EditProfileController> {
-  EditProfileScreen({super.key});
+class EditVideoScreen extends GetView<EditVideoController> {
+  EditVideoScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    Get.put(EditProfileController());
+    Get.put(EditVideoController());
     return Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: Size(Get.width, 66),
-      //   child: AppBar(
-      //     leading: IconButton(
-      //         onPressed: () {
-      //           Get.back();
-      //         },
-      //         icon: Icon(Icons.arrow_back_ios)),
-      //     title: CommonText(
-      //       text: "Profile",
-      //       weight: FontWeight.bold,
-      //       color: AppColors.white,
-      //       fontSize: 24,
-      //     ),
-      //     flexibleSpace: Container(
-      //       decoration: BoxDecoration(
-      //         gradient: LinearGradient(
-      //           begin: Alignment.centerLeft,
-      //           end: Alignment.centerRight,
-      //           colors: [AppColors.pinkColor, AppColors.lightPurple],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      appBar: PreferredSize(
+        preferredSize: Size(Get.width, 66),
+        child: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+          title: CommonText(
+            text: "Edit Video",
+            weight: FontWeight.bold,
+            color: AppColors.white,
+            fontSize: 24,
+          ),
+          centerTitle: false,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [AppColors.pinkColor, AppColors.lightPurple],
+              ),
+            ),
+          ),
+        ),
+      ),
       backgroundColor: AppColors.black.withOpacity(0.9),
 
       // backgroundColor: AppColors.lightPurple.withOpacity(0.9),
-      body: GetBuilder<EditProfileController>(builder: (_) {
+      body: GetBuilder<EditVideoController>(builder: (_) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
           child: SingleChildScrollView(
@@ -90,7 +91,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
 
                 SizedBox(height: 30),
                 CommonText(
-                  text: "Name :-",
+                  text: "Video Title :-",
                   color: AppColors.white,
                   weight: FontWeight.bold,
                   fontSize: 14,
@@ -100,7 +101,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   style: TextStyle(
                       color: AppColors.white.withOpacity(0.5), fontSize: 12),
                   decoration: InputDecoration(
-                    hintText: 'info@yourdomain.com',
+                    hintText: 'Enter Your Video Title',
                     hintStyle: TextStyle(
                         color: AppColors.white.withOpacity(0.5), fontSize: 12),
                     enabledBorder: UnderlineInputBorder(
@@ -119,7 +120,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 ),
                 SizedBox(height: 16),
                 CommonText(
-                  text: "Email :-",
+                  text: "Video Thumbnail :-",
                   color: AppColors.white,
                   weight: FontWeight.bold,
                   fontSize: 14,
@@ -129,7 +130,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   style: TextStyle(
                       color: AppColors.white.withOpacity(0.5), fontSize: 12),
                   decoration: InputDecoration(
-                    hintText: 'info@yourdomain.com',
+                    hintText: 'Recommended resolution : 800x450',
                     hintStyle: TextStyle(
                         color: AppColors.white.withOpacity(0.5), fontSize: 12),
                     enabledBorder: UnderlineInputBorder(
@@ -148,7 +149,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 ),
                 SizedBox(height: 16),
                 CommonText(
-                  text: "Phone :-",
+                  text: "Channels :-",
                   color: AppColors.white,
                   weight: FontWeight.bold,
                   fontSize: 14,
@@ -158,7 +159,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   style: TextStyle(
                       color: AppColors.white.withOpacity(0.5), fontSize: 12),
                   decoration: InputDecoration(
-                    hintText: '+1 123 456 7898',
+                    hintText: 'Select Channels',
                     hintStyle: TextStyle(
                         color: AppColors.white.withOpacity(0.5), fontSize: 12),
                     enabledBorder: UnderlineInputBorder(
@@ -176,6 +177,71 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   ),
                 ),
                 SizedBox(height: 16),
+                // SizedBox(height: 16),
+                CommonText(
+                  text: "Playlist :-",
+                  color: AppColors.white,
+                  weight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                TextFormField(
+                  controller: controller.phnTxt,
+                  style: TextStyle(
+                      color: AppColors.white.withOpacity(0.5), fontSize: 12),
+                  decoration: InputDecoration(
+                    hintText: 'Select Playlist',
+                    hintStyle: TextStyle(
+                        color: AppColors.white.withOpacity(0.5), fontSize: 12),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                    disabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                // SizedBox(height: 16),
+                CommonText(
+                  text: "Video File :-",
+                  color: AppColors.white,
+                  weight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                TextFormField(
+                  controller: controller.phnTxt,
+                  style: TextStyle(
+                      color: AppColors.white.withOpacity(0.5), fontSize: 12),
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.upload,
+                      color: AppColors.white,
+                      size: 15,
+                    ),
+                    hintText: 'Select Video File',
+                    hintStyle: TextStyle(
+                        color: AppColors.white.withOpacity(0.5), fontSize: 12),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                    disabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                  ),
+                ),
+
                 // CommonText(
                 //   text: "Country :-",
                 //   color: AppColors.white,

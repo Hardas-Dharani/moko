@@ -21,8 +21,9 @@ class SignupController extends GetxController {
   signUP() async {
     LoadingDialog.show();
     try {
-      authModal = await AuthenticationRepositoryIml()
+      final result = await AuthenticationRepositoryIml()
           .signUp(usrName.text, passTxt.text, emailTxt.text, "");
+      print(result);
       if (authModal.status!) {
         LoadingDialog.hide();
         Get.find<LocalStorageService>().loginUser = authModal;

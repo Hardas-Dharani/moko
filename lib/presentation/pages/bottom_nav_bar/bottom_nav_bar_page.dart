@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moko/app/config/app_colors.dart';
 import 'package:moko/app/services/local_storage.dart';
 import 'package:moko/presentation/pages/explore_screen/explore_screen_page.dart';
+import 'package:moko/routes/app_routes.dart';
 
 import '../../../app/util/util.dart';
 import '../edit_profile_screen/controller/edit_profile_screen_controller.dart';
@@ -165,9 +166,14 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
               ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => controller.drawerItem[index]
-                              ['label'] ==
-                          "Creater"
+                  itemBuilder: (context, index) => Get.find<
+                                      LocalStorageService>()
+                                  .loginUser!
+                                  .data!
+                                  .user!
+                                  .userType ==
+                              "Content_Creator" &&
+                          controller.drawerItem[index]['label'] == "Creater"
                       ? ExpansionTile(
                           title: Text(
                             controller.drawerItem[index]['label'],
@@ -190,12 +196,34 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     shrinkWrap: true,
                                     padding: EdgeInsets.zero,
                                     physics: NeverScrollableScrollPhysics(),
-                                    itemBuilder: (context, index) => Text(
-                                          controller.createrListMenuModel.data!
-                                              .creators![index].genreName!,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
+                                    itemBuilder: (context, index) =>
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.back();
+                                            Get.toNamed(Routes.createrScreen,
+                                                arguments: {
+                                                  "channel_id": controller
+                                                      .createrListMenuModel
+                                                      .data!
+                                                      .creators![index]
+                                                      .id,
+                                                  "slug": controller
+                                                      .createrListMenuModel
+                                                      .data!
+                                                      .creators![index]
+                                                      .genreSlug
+                                                });
+                                          },
+                                          child: Text(
+                                            controller
+                                                .createrListMenuModel
+                                                .data!
+                                                .creators![index]
+                                                .genreName!,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            ),
                                           ),
                                         ),
                                     separatorBuilder: (context, index) =>
@@ -206,30 +234,62 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                         .data!.creators!.length)
                           ],
                         )
-                      : ListTile(
-                          leading: Icon(
-                            controller.drawerItem[index]['icon'],
-                            color: AppColors.white,
-                          ),
-                          title: Text(
-                            controller.drawerItem[index]['label'],
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
-                          ),
-                          onTap: () {
-                            Get.back();
-                            if (controller.drawerItem[index]['label'] ==
-                                "Live Streaming Profile") {
-                              Get.to(LiveStreamScreen());
-                            }
-                            // else if (controller.drawerItem[index]['label'] ==
-                            //     "Creater") {
-                            //   Get.to(ExploreScreen());
-                            // }
-                          },
-                        ),
+                      : Get.find<LocalStorageService>()
+                                      .loginUser!
+                                      .data!
+                                      .user!
+                                      .userType !=
+                                  "Content_Creator" &&
+                              controller.drawerItem[index]['label'] == "User"
+                          ? ListTile(
+                              leading: Icon(
+                                controller.drawerItem[index]['icon'],
+                                color: AppColors.white,
+                              ),
+                              title: Text(
+                                controller.drawerItem[index]['label'],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              onTap: () {
+                                Get.back();
+
+                                Get.toNamed(Routes.dashBoardUserScreen);
+
+                                // else if (controller.drawerItem[index]['label'] ==
+                                //     "Creater") {
+                                //   Get.to(ExploreScreen());
+                                // }
+                              },
+                            )
+                          : controller.drawerItem[index]['label'] == "User"
+                              ? SizedBox()
+                              : ListTile(
+                                  leading: Icon(
+                                    controller.drawerItem[index]['icon'],
+                                    color: AppColors.white,
+                                  ),
+                                  title: Text(
+                                    controller.drawerItem[index]['label'],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Get.back();
+                                    if (controller.drawerItem[index]['label'] ==
+                                        "Live Streaming Profile") {
+                                      Get.to(LiveStreamScreen());
+                                    }
+                                    // else if (controller.drawerItem[index]['label'] ==
+                                    //     "Creater") {
+                                    //   Get.to(ExploreScreen());
+                                    // }
+                                  },
+                                ),
                   padding: EdgeInsets.only(left: 10),
                   separatorBuilder: (context, index) => SizedBox(
                         height: 10,

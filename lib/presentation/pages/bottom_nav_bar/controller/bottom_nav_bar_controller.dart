@@ -9,6 +9,7 @@ class BottomNavBarController extends GetxController {
   List<Map<String, dynamic>> drawerItem = [
     {'label': 'Home', 'icon': Icons.home_outlined},
     {'label': 'Creater', 'icon': Icons.list},
+    {'label': 'User', 'icon': Icons.dashboard},
     // {'label': 'TV Shows', 'icon': Icons.tv},
     // {'label': 'Movies', 'icon': Icons.movie},
     // {'label': 'Live Streaming Profile', 'icon': Icons.live_tv},

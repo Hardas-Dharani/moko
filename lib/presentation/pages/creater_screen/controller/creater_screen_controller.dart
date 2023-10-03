@@ -1,42 +1,44 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:moko/data/models/movie_detail_model.dart';
 
 import '../../../../app/util/loader.dart';
+import '../../../../data/models/creater_model.dart';
 import '../../../../data/repositories/home_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
-class MovieDetailController extends GetxController {
-  TextEditingController emailTxt = TextEditingController();
-  TextEditingController passTxt = TextEditingController();
-  final passwordVisible = true.obs;
-  final formKey = GlobalKey<FormState>();
+enum buttonEnum { live, category, newest }
+
+class CreaterController extends GetxController {
   AuthModal authModal = AuthModal();
   BottomNavigationItem _currentItem = BottomNavigationItem.Home;
 
+  var seletectButton = buttonEnum.live;
+  CreaterModel homeDetailData = CreaterModel();
+  int indexCreater = 0;
   DateTime now = DateTime.now();
+
   int indexSelected = 0;
   bool hasNewNotification = false;
   String fireStoreId = '';
-  MovieDetailModel movieDetailModel = MovieDetailModel();
   BottomNavigationItem get currentItem => _currentItem;
-
   void changeCurrentItem(BottomNavigationItem item) {
     _currentItem = item;
     update();
   }
 
-  movieDetail() async {
+  getDashBoard() async {
     LoadingDialog.show();
     try {
-      final s = await HomeRepositoryIml().getMovieDetail("54");
-      movieDetailModel = MovieDetailModel.fromJson(s);
+      print(Get.arguments["channel_id"]);
+      final s = await HomeRepositoryIml().getChannelId(
+          Get.arguments["channel_id"].toString(),
+          Get.arguments["slug"].toString());
+      homeDetailData = CreaterModel.fromJson(s);
+      print(s);
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();
     } catch (e) {
-      Get.find();
       LoadingDialog.hide();
       rethrow;
     }
@@ -44,7 +46,7 @@ class MovieDetailController extends GetxController {
 
   @override
   void onInit() {
-    movieDetail();  
+    getDashBoard();
     // TODO: implement onInit
     super.onInit();
   }

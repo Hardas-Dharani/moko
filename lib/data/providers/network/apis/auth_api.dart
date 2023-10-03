@@ -6,6 +6,7 @@ class AuthAPI implements APIRequestRepresentable {
   final AuthType type;
   String? username;
   String? password;
+  String? phone;
   String? email;
   String? userType;
 
@@ -19,12 +20,19 @@ class AuthAPI implements APIRequestRepresentable {
             username: username,
             email: email,
             userType: userType);
+  AuthAPI.updateProfile(String username, String email, String phone)
+      : this._(
+            type: AuthType.updateProfile,
+            phone: phone,
+            username: username,
+            email: email);
 
   AuthAPI._(
       {required this.type,
       this.password,
       this.username,
       this.userType,
+      this.phone,
       this.email});
 
   @override
@@ -38,6 +46,12 @@ class AuthAPI implements APIRequestRepresentable {
           'password': password,
           'name': username,
           'user_type': userType
+        };
+      case AuthType.updateProfile:
+        return {
+          'email': email,
+          'phone': phone,
+          'name': username,
         };
       default:
         return "";
@@ -60,6 +74,8 @@ class AuthAPI implements APIRequestRepresentable {
     switch (type) {
       case AuthType.login:
         return APIEndpoint.middleWareUrl + APIEndpoint.loginUrl;
+      case AuthType.updateProfile:
+        return APIEndpoint.middleWareUrl + APIEndpoint.updateProfile;
       case AuthType.logout:
         return "/login";
       case AuthType.signUp:
@@ -82,4 +98,4 @@ class AuthAPI implements APIRequestRepresentable {
   }
 }
 
-enum AuthType { login, logout, signUp }
+enum AuthType { login, logout, signUp, updateProfile }

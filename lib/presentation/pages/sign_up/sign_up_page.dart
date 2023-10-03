@@ -132,7 +132,7 @@ class SignUpScreen extends GetView<SignupController> {
                       value: controller.radioCheck,
                       onChanged: (value) {
                         if (value!) {
-                          controller.creater = "creater";
+                          controller.creater = "Content_Creator";
                         }
                         controller.updateBool(value);
                       },
