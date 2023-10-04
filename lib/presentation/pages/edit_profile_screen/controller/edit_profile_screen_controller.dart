@@ -40,7 +40,7 @@ class EditProfileController extends GetxController {
       emailTxt.text =
           Get.find<LocalStorageService>().loginUser!.data!.user!.email!;
       phnTxt.text =
-          Get.find<LocalStorageService>().loginUser!.data!.user!.phone!;
+          Get.find<LocalStorageService>().loginUser!.data!.user!.phone ?? "";
     }
     super.onInit();
   }

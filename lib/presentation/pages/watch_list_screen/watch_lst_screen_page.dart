@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moko/app/services/local_storage.dart';
 
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/movie_card.dart';
-import '../../../app/util/util.dart';
 import 'controller/watch_lst_screen_controller.dart';
 
 class WatchListScreen extends GetView<WatchListController> {
@@ -41,23 +41,34 @@ class WatchListScreen extends GetView<WatchListController> {
                         SizedBox(
                           height: 40,
                         ),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: movieList.length,
-                          itemBuilder: (context, categoryIndex) {
-                            return MovieCard(
-                                titleBool: true,
-                                title: movieList[categoryIndex]["title"],
-                                imageUrl: movieList[categoryIndex]["imageUrl"]);
-                          },
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 300,
-                                  childAspectRatio: 2 / 3,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20),
-                        ),
+                        Get.find<LocalStorageService>().movieModels != null
+                            ? GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: Get.find<LocalStorageService>()
+                                    .movieModels!
+                                    .length,
+                                itemBuilder: (context, categoryIndex) {
+                                  return MovieCard(
+                                      titleBool: true,
+                                      channelID: Get.find<LocalStorageService>()
+                                          .movieModels![categoryIndex]
+                                          .id!,
+                                      title: Get.find<LocalStorageService>()
+                                          .movieModels![categoryIndex]
+                                          .movieName!,
+                                      imageUrl: Get.find<LocalStorageService>()
+                                          .movieModels![categoryIndex]
+                                          .image!);
+                                },
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                        maxCrossAxisExtent: 300,
+                                        childAspectRatio: 2 / 3,
+                                        crossAxisSpacing: 20,
+                                        mainAxisSpacing: 20),
+                              )
+                            : SizedBox(),
                       ],
                     ),
                   ),

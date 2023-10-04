@@ -53,6 +53,7 @@ class CategorySection extends StatelessWidget {
             itemBuilder: (context, movieIndex) {
               // Map<String, dynamic> movieTitle = movies[movieIndex];
               return MovieCard(
+                  channelID: sliderByGenres.slider![movieIndex].id.toString(),
                   titleBool: !showTitle,
                   title: sliderByGenres.slider![movieIndex].seriesName!,
                   imageUrl: sliderByGenres.slider![movieIndex].seriesPoster! !=

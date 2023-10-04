@@ -4,18 +4,18 @@ final List<String> categories = [
   "Comedy",
   "Action",
   'Sci-Fi',
-]; 
-List<Map<String, dynamic>> movieList =[
-    {
-      "title": "The Adventurers",
-      "imageUrl":
-          "https://m.media-amazon.com/images/M/MV5BZWI1Zjc0NWItZmZmZC00ZDllLThjZDYtNDViYTFkYzA5MWY2XkEyXkFqcGdeQXVyMTk0NTY2ODQ@._V1_.jpg"
-    },
-    {
-      "title": "Live Die Repeat",
-      "imageUrl":
-          "https://m.media-amazon.com/images/I/71C93vSwpIL._AC_SL1000_.jpg"
-    },
+];
+List<Map<String, dynamic>> movieList = [
+  {
+    "title": "The Adventurers",
+    "imageUrl":
+        "https://m.media-amazon.com/images/M/MV5BZWI1Zjc0NWItZmZmZC00ZDllLThjZDYtNDViYTFkYzA5MWY2XkEyXkFqcGdeQXVyMTk0NTY2ODQ@._V1_.jpg"
+  },
+  {
+    "title": "Live Die Repeat",
+    "imageUrl":
+        "https://m.media-amazon.com/images/I/71C93vSwpIL._AC_SL1000_.jpg"
+  },
   {
     "title": "The Tomorrow Job",
     "imageUrl":
@@ -25,22 +25,23 @@ List<Map<String, dynamic>> movieList =[
     "title": "The Tomorrow War",
     "imageUrl":
         "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/The_Tomorrow_War_%282021_film%29_official_theatrical_poster.jpg/220px-The_Tomorrow_War_%282021_film%29_official_theatrical_poster.jpg"
-  } ,{
-      "title": "The Last Warriors",
-      "imageUrl":
-          "https://image.tmdb.org/t/p/w500/rEPhPb8mDomtmn6tHr3vE9QutkB.jpg"
-    },
-    {
-      "title": "Fury Road",
-      "imageUrl":
-          "https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"
-    },
-    {
-      "title": "Assassin's Vendetta",
-      "imageUrl":
-          "https://m.media-amazon.com/images/M/MV5BMjEwNzEzMTYxMl5BMl5BanBnXkFtZTcwMzc4ODIwOQ@@._V1_FMjpg_UX1000_.jpg"
-    }
-  ];
+  },
+  {
+    "title": "The Last Warriors",
+    "imageUrl":
+        "https://image.tmdb.org/t/p/w500/rEPhPb8mDomtmn6tHr3vE9QutkB.jpg"
+  },
+  {
+    "title": "Fury Road",
+    "imageUrl":
+        "https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"
+  },
+  {
+    "title": "Assassin's Vendetta",
+    "imageUrl":
+        "https://m.media-amazon.com/images/M/MV5BMjEwNzEzMTYxMl5BMl5BanBnXkFtZTcwMzc4ODIwOQ@@._V1_FMjpg_UX1000_.jpg"
+  }
+];
 final Map<String, List<Map<String, dynamic>>> moviesByCategory = {
   "Popular Shows": [
     {
@@ -113,6 +114,28 @@ final Map<String, List<Map<String, dynamic>>> moviesByCategory = {
     }
   ]
 };
+
+class MovieModelDemo {
+  String? movieName;
+  String? id;
+  String? image;
+
+  MovieModelDemo({this.movieName, this.id, this.image});
+
+  MovieModelDemo.fromJson(Map<String, dynamic> json) {
+    movieName = json['movieName'];
+    id = json['id'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['movieName'] = this.movieName;
+    data['id'] = this.id;
+    data['image'] = this.image;
+    return data;
+  }
+}
 
 class Utils {
   static Map<String, dynamic> exceptionWidget(bool error, {String? message}) {

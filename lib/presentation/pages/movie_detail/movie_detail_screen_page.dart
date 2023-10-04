@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moko/app/services/local_storage.dart';
 import 'package:moko/app/util/common_txt.dart';
 import 'package:moko/app/util/custom_button.dart';
 
@@ -292,7 +293,74 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
                                       width: 200,
                                       borderBool: true,
                                       backGroundColor: AppColors.pinkColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        final movieModels =
+                                            Get.find<LocalStorageService>()
+                                                .movieModels;
+
+                                        if (movieModels != null) {
+                                          final newMovie = MovieModelDemo(
+                                            movieName: controller
+                                                    .movieDetailModel
+                                                    .data
+                                                    ?.channelDetail
+                                                    ?.seriesName ??
+                                                '',
+                                            id: controller.movieDetailModel.data
+                                                    ?.channelDetail?.id
+                                                    ?.toString() ??
+                                                '',
+                                            image: controller
+                                                    .movieDetailModel
+                                                    .data
+                                                    ?.channelDetail
+                                                    ?.seriesPoster ??
+                                                Get.arguments,
+                                          );
+
+                                          final existingIndex =
+                                              movieModels.indexWhere((movie) =>
+                                                  movie.id == newMovie.id);
+
+                                          if (existingIndex != -1) {
+                                            // If a movie with the same ID exists, replace it
+                                            movieModels[existingIndex] =
+                                                newMovie;
+                                          } else {
+                                            // Otherwise, add the new movie
+                                            movieModels.add(newMovie);
+                                          }
+                                        } else {
+                                          final defaultMovieModel =
+                                              MovieModelDemo(
+                                            movieName: controller
+                                                    .movieDetailModel
+                                                    .data
+                                                    ?.channelDetail
+                                                    ?.seriesName ??
+                                                '',
+                                            id: controller.movieDetailModel.data
+                                                    ?.channelDetail?.id
+                                                    ?.toString() ??
+                                                '',
+                                            image: controller
+                                                    .movieDetailModel
+                                                    .data
+                                                    ?.channelDetail
+                                                    ?.seriesPoster ??
+                                                Get.arguments,
+                                          );
+
+                                          // Create a new list and add the defaultMovieModel
+                                          final newMovieModelsList = [
+                                            defaultMovieModel
+                                          ];
+
+                                          // Store the new list in the LocalStorageService
+                                          Get.find<LocalStorageService>()
+                                              .movieModels = newMovieModelsList;
+                                        }
+                                      },
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -323,7 +391,7 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
                               ),
                               CommonText(
                                 text: controller.movieDetailModel.data!
-                                        .channelDetail!.seoDescription ??
+                                        .channelDetail!.seriesInfo ??
                                     "",
                                 color: AppColors.white,
                                 fontSize: 12,
@@ -518,6 +586,12 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
                                   itemBuilder: (context, categoryIndex) {
                                     return MovieCard(
                                       titleBool: true,
+                                      channelID: controller
+                                          .movieDetailModel
+                                          .data!
+                                          .channelAllVideos![categoryIndex]
+                                          .id
+                                          .toString(),
                                       title: controller
                                               .movieDetailModel
                                               .data!
@@ -527,7 +601,7 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
                                       imageUrl: controller
                                                   .movieDetailModel
                                                   .data!
-                                                .channelAllVideos![
+                                                  .channelAllVideos![
                                                       categoryIndex]
                                                   .videoImage! !=
                                               ""

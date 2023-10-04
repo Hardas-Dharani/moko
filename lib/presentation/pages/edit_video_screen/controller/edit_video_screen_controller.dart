@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:moko/app/services/local_storage.dart';
 
 import '../../../../app/util/loader.dart';
 import '../../../../data/repositories/auth_repository.dart';
@@ -34,14 +33,6 @@ class EditVideoController extends GetxController {
   void onInit() {
     // TODO: implement onInit
 
-    if (Get.find<LocalStorageService>().loginUser != null) {
-      usrTxt.text =
-          Get.find<LocalStorageService>().loginUser!.data!.user!.name!;
-      emailTxt.text =
-          Get.find<LocalStorageService>().loginUser!.data!.user!.email!;
-      phnTxt.text =
-          Get.find<LocalStorageService>().loginUser!.data!.user!.phone!;
-    }
     super.onInit();
   }
 

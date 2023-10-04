@@ -276,7 +276,7 @@ class EditVideoScreen extends GetView<EditVideoController> {
                     height: 55,
                     backGroundColor: AppColors.pinkColor,
                     onPressed: () {
-                      controller.updateProfile();
+                      // controller.updateProfile();
                     },
                     child: CommonText(
                       text: "Save Changes",

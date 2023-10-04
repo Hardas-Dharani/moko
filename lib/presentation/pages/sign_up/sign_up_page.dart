@@ -48,7 +48,7 @@ class SignUpScreen extends GetView<SignupController> {
               ),
               CustomTextField(
                 height: 40,
-                controller: TextEditingController(),
+                controller: controller.usrName,
                 hintText: 'Name',
                 prefixIcon: Image.asset(Utils.getImagePath("person_icon")),
                 // prefixIconData: Icons.person_2_outlined,
@@ -67,7 +67,7 @@ class SignUpScreen extends GetView<SignupController> {
               ),
               CustomTextField(
                 height: 40,
-                controller: TextEditingController(),
+                controller: controller.emailTxt,
                 hintText: 'info@yourdomain.com',
                 prefixIcon: Image.asset(Utils.getImagePath("mail_icon")),
                 // suffixIconData: Icons.clear,
@@ -85,7 +85,7 @@ class SignUpScreen extends GetView<SignupController> {
               ),
               CustomTextField(
                 height: 40,
-                controller: TextEditingController(),
+                controller: controller.passTxt,
                 hintText: 'Password',
                 prefixIcon: Image.asset(Utils.getImagePath("lock_icon")),
 
@@ -133,12 +133,14 @@ class SignUpScreen extends GetView<SignupController> {
                       onChanged: (value) {
                         if (value!) {
                           controller.creater = "Content_Creator";
+                        } else {
+                          controller.creater = "User";
                         }
                         controller.updateBool(value);
                       },
                     ),
                     Text(
-                      'Are you creater',
+                      'Are you creator',
                       style: TextStyle(color: AppColors.white),
                     ),
                   ],
@@ -165,7 +167,15 @@ class SignUpScreen extends GetView<SignupController> {
                 gradient: LinearGradient(
                     colors: [AppColors.pinkColor, AppColors.pinkColor]),
                 onPressed: () {
-                  controller.signUP();
+                  if (controller.emailTxt.text.isNotEmpty &&
+                      controller.passTxt.text.isNotEmpty &&
+                      controller.usrName.text.isNotEmpty) {
+                    controller.signUP();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("All Field Required.."),
+                    ));
+                  }
                 },
                 child: Text(
                   'Sign Up',
@@ -181,7 +191,8 @@ class SignUpScreen extends GetView<SignupController> {
                   CommonText(
                     text: "Already have an account? ",
                     color: AppColors.white,
-                    fontSize: 12,
+                    fontSize: 14,
+                    weight: FontWeight.bold,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -190,7 +201,8 @@ class SignUpScreen extends GetView<SignupController> {
                     child: CommonText(
                       text: "Sign in",
                       color: AppColors.blue,
-                      fontSize: 12,
+                      fontSize: 14,
+                      weight: FontWeight.bold,
                     ),
                   ),
                 ],

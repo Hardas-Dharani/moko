@@ -9,7 +9,6 @@ import '../../../app/util/util.dart';
 import '../edit_profile_screen/controller/edit_profile_screen_controller.dart';
 import '../edit_profile_screen/edit_profile_screen_page.dart';
 import '../home_screen/home_screen_page.dart';
-import '../home_screen/widget/live_stream.dart';
 import '../watch_list_screen/watch_lst_screen_page.dart';
 import 'controller/bottom_nav_bar_controller.dart';
 
@@ -94,7 +93,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                               icon: Icon(Icons.home_outlined),
                             ),
                             BottomNavigationBarItem(
-                              label: 'Creater',
+                              label: 'Explore',
                               icon: Icon(Icons.search_outlined),
                             ),
                             BottomNavigationBarItem(
@@ -173,7 +172,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                   .user!
                                   .userType ==
                               "Content_Creator" &&
-                          controller.drawerItem[index]['label'] == "Creater"
+                          controller.drawerItem[index]['label'] == "Creator"
                       ? ExpansionTile(
                           title: Text(
                             controller.drawerItem[index]['label'],
@@ -234,39 +233,17 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                         .data!.creators!.length)
                           ],
                         )
-                      : Get.find<LocalStorageService>()
-                                      .loginUser!
-                                      .data!
-                                      .user!
-                                      .userType !=
-                                  "Content_Creator" &&
-                              controller.drawerItem[index]['label'] == "User"
-                          ? ListTile(
-                              leading: Icon(
-                                controller.drawerItem[index]['icon'],
-                                color: AppColors.white,
-                              ),
-                              title: Text(
-                                controller.drawerItem[index]['label'],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              onTap: () {
-                                Get.back();
-
-                                Get.toNamed(Routes.dashBoardUserScreen);
-
-                                // else if (controller.drawerItem[index]['label'] ==
-                                //     "Creater") {
-                                //   Get.to(ExploreScreen());
-                                // }
-                              },
-                            )
-                          : controller.drawerItem[index]['label'] == "User"
-                              ? SizedBox()
-                              : ListTile(
+                      : controller.drawerItem[index]['label'] == "Creator"
+                          ? SizedBox()
+                          : Get.find<LocalStorageService>()
+                                          .loginUser!
+                                          .data!
+                                          .user!
+                                          .userType !=
+                                      "Content_Creator" &&
+                                  controller.drawerItem[index]['label'] ==
+                                      "User"
+                              ? ListTile(
                                   leading: Icon(
                                     controller.drawerItem[index]['icon'],
                                     color: AppColors.white,
@@ -280,16 +257,44 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                   ),
                                   onTap: () {
                                     Get.back();
-                                    if (controller.drawerItem[index]['label'] ==
-                                        "Live Streaming Profile") {
-                                      Get.to(LiveStreamScreen());
-                                    }
+
+                                    Get.toNamed(Routes.dashBoardUserScreen);
+
                                     // else if (controller.drawerItem[index]['label'] ==
                                     //     "Creater") {
                                     //   Get.to(ExploreScreen());
                                     // }
                                   },
-                                ),
+                                )
+                              : controller.drawerItem[index]['label'] == "User"
+                                  ? SizedBox()
+                                  : ListTile(
+                                      leading: Icon(
+                                        controller.drawerItem[index]['icon'],
+                                        color: AppColors.white,
+                                      ),
+                                      title: Text(
+                                        controller.drawerItem[index]['label'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Get.back();
+                                        if (controller.drawerItem[index]
+                                                ['label'] ==
+                                            "Sign Out") {
+                                          Get.find<LocalStorageService>()
+                                              .loginUser = null;
+                                          Get.offAllNamed(Routes.signInScreen);
+                                        }
+                                        // else if (controller.drawerItem[index]['label'] ==
+                                        //     "Creater") {
+                                        //   Get.to(ExploreScreen());
+                                        // }
+                                      },
+                                    ),
                   padding: EdgeInsets.only(left: 10),
                   separatorBuilder: (context, index) => SizedBox(
                         height: 10,

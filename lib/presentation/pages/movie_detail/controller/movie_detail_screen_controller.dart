@@ -30,13 +30,14 @@ class MovieDetailController extends GetxController {
   movieDetail() async {
     LoadingDialog.show();
     try {
-      final s = await HomeRepositoryIml().getMovieDetail("54");
+      print(Get.arguments["channel_id"]);
+      final s =
+          await HomeRepositoryIml().getMovieDetail(Get.arguments["channel_id"]);
       movieDetailModel = MovieDetailModel.fromJson(s);
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();
     } catch (e) {
-      Get.find();
       LoadingDialog.hide();
       rethrow;
     }
@@ -44,7 +45,7 @@ class MovieDetailController extends GetxController {
 
   @override
   void onInit() {
-    movieDetail();  
+    movieDetail();
     // TODO: implement onInit
     super.onInit();
   }

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:moko/data/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../util/util.dart';
+
 class LocalStorageService extends GetxService {
   SharedPreferences? _sharedPreferences;
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -45,6 +47,29 @@ class LocalStorageService extends GetxService {
     }
   }
 
+  List<MovieModelDemo>? get movieModels {
+    final rawJsonList =
+        _sharedPreferences?.getStringList(_Key.movieModel.toString());
+    if (rawJsonList == null) {
+      return null;
+    }
+
+    return rawJsonList
+        .map((rawJson) => MovieModelDemo.fromJson(jsonDecode(rawJson)))
+        .toList();
+  }
+
+  set movieModels(List<MovieModelDemo>? values) {
+    if (values != null) {
+      final rawJsonList =
+          values.map((value) => json.encode(value.toJson())).toList();
+      _sharedPreferences?.setStringList(
+          _Key.movieModel.toString(), rawJsonList);
+    } else {
+      _sharedPreferences?.remove(_Key.movieModel.toString());
+    }
+  }
+
   String? get token {
     final rawJson = _sharedPreferences?.getString(_Key.token.toString());
     if (rawJson == null) {
@@ -67,4 +92,4 @@ class LocalStorageService extends GetxService {
   }
 }
 
-enum _Key { user, token }
+enum _Key { user, token, movieModel }

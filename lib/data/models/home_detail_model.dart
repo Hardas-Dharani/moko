@@ -85,8 +85,8 @@ class HomeDetailModel {
 //     return data;
 //   }
 // }
-
 class Slider {
+  int? id;
   int? seriesLangId;
   String? seriesGenres;
   int? upcoming;
@@ -94,19 +94,20 @@ class Slider {
   String? seriesName;
   String? seriesSlug;
   String? seriesInfo;
-  Null actorId;
-  Null directorId;
+  String? actorId;
+  String? directorId;
   String? seriesPoster;
-  Null imdbId;
-  Null imdbRating;
-  Null imdbVotes;
+  String? imdbId;
+  String? imdbRating;
+  String? imdbVotes;
   String? seoTitle;
   String? seoDescription;
   String? seoKeyword;
   String? contentRating;
 
   Slider(
-      {this.seriesLangId,
+      {this.id,
+      this.seriesLangId,
       this.seriesGenres,
       this.upcoming,
       this.seriesAccess,
@@ -125,6 +126,7 @@ class Slider {
       this.contentRating});
 
   Slider.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     seriesLangId = json['series_lang_id'];
     seriesGenres = json['series_genres'];
     upcoming = json['upcoming'];
@@ -146,6 +148,7 @@ class Slider {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['series_lang_id'] = this.seriesLangId;
     data['series_genres'] = this.seriesGenres;
     data['upcoming'] = this.upcoming;

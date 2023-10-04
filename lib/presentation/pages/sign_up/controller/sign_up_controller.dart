@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:moko/data/models/login_model.dart';
 
 import '../../../../app/services/local_storage.dart';
 import '../../../../app/util/loader.dart';
-import '../../../../data/models/login_model.dart';
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../routes/app_routes.dart';
 
@@ -22,8 +22,9 @@ class SignupController extends GetxController {
     LoadingDialog.show();
     try {
       final result = await AuthenticationRepositoryIml()
-          .signUp(usrName.text, passTxt.text, emailTxt.text, "");
+          .signUp(usrName.text, passTxt.text, emailTxt.text, creater);
       print(result);
+      authModal = LoginModel.fromJson(result);
       if (authModal.status!) {
         LoadingDialog.hide();
         Get.find<LocalStorageService>().loginUser = authModal;

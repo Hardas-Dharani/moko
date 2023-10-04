@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/data/models/creater_menu_model.dart';
 
+import '../../../../app/services/local_storage.dart';
 import '../../../../data/repositories/home_repository.dart';
 
 class BottomNavBarController extends GetxController {
   BottomNavigationItem _currentItem = BottomNavigationItem.Home;
   List<Map<String, dynamic>> drawerItem = [
     {'label': 'Home', 'icon': Icons.home_outlined},
-    {'label': 'Creater', 'icon': Icons.list},
+    {'label': 'Creator', 'icon': Icons.list},
     {'label': 'User', 'icon': Icons.dashboard},
     // {'label': 'TV Shows', 'icon': Icons.tv},
     // {'label': 'Movies', 'icon': Icons.movie},
@@ -43,6 +44,7 @@ class BottomNavBarController extends GetxController {
   @override
   void onInit() {
     categoryMenu();
+    print(Get.find<LocalStorageService>().loginUser!.data!.user!.userType);
     // TODO: implement onInit
     super.onInit();
   }

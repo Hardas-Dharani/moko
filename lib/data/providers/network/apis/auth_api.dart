@@ -66,7 +66,7 @@ class AuthAPI implements APIRequestRepresentable {
 
   @override
   HTTPMethod get method {
-    return HTTPMethod.memberFormMethod;
+    return HTTPMethod.post;
   }
 
   @override
