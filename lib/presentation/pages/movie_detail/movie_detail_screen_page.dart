@@ -563,12 +563,17 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
                               //       }),
                               // ),
 
-                              CommonText(
-                                text: "Related More",
-                                color: AppColors.white,
-                                fontSize: 16,
-                                weight: FontWeight.bold,
-                              ),
+                              controller.movieDetailModel.data == null
+                                  ? SizedBox()
+                                  : controller.movieDetailModel.data!
+                                          .channelAllVideos!.isNotEmpty
+                                      ? CommonText(
+                                          text: "Related More",
+                                          color: AppColors.white,
+                                          fontSize: 16,
+                                          weight: FontWeight.bold,
+                                        )
+                                      : SizedBox(),
                               SizedBox(
                                 height: 10,
                               ),

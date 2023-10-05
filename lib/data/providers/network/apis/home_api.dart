@@ -9,6 +9,7 @@ class HomeApi implements APIRequestRepresentable {
   final HomeType type;
   final String? channelId;
   final String? slug;
+  final Map<String, dynamic>? jsonParse;
   HomeApi.CreaterListMenu()
       : this._(
           type: HomeType.getCategory,
@@ -23,10 +24,16 @@ class HomeApi implements APIRequestRepresentable {
       : this._(type: HomeType.getMovieDetail, slug: search);
   HomeApi.getSearch(String search)
       : this._(type: HomeType.getSearch, slug: search);
-  HomeApi._({required this.type, this.channelId, this.slug});
+  HomeApi._({required this.type, this.jsonParse, this.channelId, this.slug});
 
   @override
-  get body => {};
+  get body {
+    switch (type) {
+    
+      default:
+        return {};
+    }
+  }
 
   @override
   String get endpoint => APIEndpoint.baseUrl;
@@ -103,5 +110,6 @@ enum HomeType {
   getSearch,
   getMovieDetail,
   getChannelId,
+  
   logout
 }

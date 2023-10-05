@@ -14,6 +14,13 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>moko</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Example usage description</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Example usage description</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Example usage description</string>
+
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

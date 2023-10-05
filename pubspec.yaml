@@ -47,6 +47,7 @@ dependencies:
   cached_network_image: ^3.2.3
   google_fonts: ^5.1.0
   flutter_spinkit: ^5.2.0
+  images_picker: ^1.2.11
   
 dev_dependencies:
   flutter_test:
