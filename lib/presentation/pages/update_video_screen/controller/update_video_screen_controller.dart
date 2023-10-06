@@ -12,7 +12,7 @@ import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
 enum buttonEnum { live, category, newest }
 
-class EditVideoController extends GetxController {
+class UpdateVideoController extends GetxController {
   TextEditingController emailTxt = TextEditingController();
   TextEditingController usrTxt = TextEditingController();
   TextEditingController playistTxt = TextEditingController();
@@ -101,18 +101,19 @@ class EditVideoController extends GetxController {
   uploadVideo() async {
     LoadingDialog.show();
     try {
-      final result = await ContentCreatorRepositoryIml().uploadVideos({
+      final result = await ContentCreatorRepositoryIml().updateVideos({
         "video_title": usrTxt.text,
         "video_thumbnail": imageThumbil,
         "channel_id": selectedChannel.id.toString(),
         "video_file": video,
         "playlist_id": selectedPlaylist.id.toString()
-      });
+      }, Get.arguments);
       if (result["status"]) {
         Get.snackbar('Message', result["message"]);
       } else {
         Get.snackbar('Message', result["message"]);
       }
+
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();

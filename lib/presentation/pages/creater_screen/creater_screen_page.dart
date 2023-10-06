@@ -113,7 +113,15 @@ class CreaterScreen extends GetView<CreaterController> {
                         height: 20,
                       ),
                       controller.homeDetailData.data == null
-                          ? SizedBox()
+                          ? SizedBox(
+                              height: Get.height,
+                              child: Center(
+                                child: Text(
+                                  "No data available",
+                                  style: TextStyle(color: AppColors.white),
+                                ),
+                              ),
+                            )
                           : SizedBox(
                               height: 40,
                               child: ListView.separated(

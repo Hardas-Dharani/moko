@@ -115,7 +115,15 @@ class LiveStreamScreen extends GetView<HomeController> {
                       ],
                     ),
                     controller.homeDetailData.data == null
-                        ? SizedBox()
+                        ? SizedBox(
+                            height: Get.height,
+                            child: Center(
+                              child: Text(
+                                "No data available",
+                                style: TextStyle(color: AppColors.white),
+                              ),
+                            ),
+                          )
                         : Container(
                             padding: EdgeInsets.symmetric(vertical: 20),
                             color: AppColors.black,

@@ -33,14 +33,18 @@ class HomeController extends GetxController {
   getDashBoard() async {
     LoadingDialog.show();
     try {
-      final s = await HomeRepositoryIml().getDashBoard();
-      homeDetailData = HomeDetailModel.fromJson(s);
-      print(s);
+      final result = await HomeRepositoryIml().getDashBoard();
+      if (result["status"]) {
+        Get.snackbar('Message', result["message"]);
+        homeDetailData = HomeDetailModel.fromJson(result);
+      } else {
+        Get.snackbar('Message', result["message"]);
+      }
+
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();
     } catch (e) {
-      Get.find();
       LoadingDialog.hide();
       rethrow;
     }

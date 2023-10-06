@@ -171,7 +171,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                   .data!
                                   .user!
                                   .userType ==
-                              "Content_Creator" &&
+                              "User" &&
                           controller.drawerItem[index]['label'] == "Creator"
                       ? ExpansionTile(
                           title: Text(
@@ -233,7 +233,9 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                         .data!.creators!.length)
                           ],
                         )
-                      : controller.drawerItem[index]['label'] == "Creator"
+                      // :
+                      // controller.drawerItem[index]['label'] == "Creator"
+                      : controller.drawerItem[index]['label'] == "User"
                           ? SizedBox()
                           : Get.find<LocalStorageService>()
                                           .loginUser!
@@ -258,7 +260,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                   onTap: () {
                                     Get.back();
 
-                                    Get.toNamed(Routes.dashBoardUserScreen);
+                                    Get.toNamed(Routes.videoLst);
 
                                     // else if (controller.drawerItem[index]['label'] ==
                                     //     "Creater") {

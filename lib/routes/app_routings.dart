@@ -17,6 +17,10 @@ import 'package:moko/presentation/pages/sign_in/binding/sign_in_binding.dart';
 import 'package:moko/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:moko/presentation/pages/sign_up/binding/sign_up_binding.dart';
 import 'package:moko/presentation/pages/sign_up/sign_up_page.dart';
+import 'package:moko/presentation/pages/update_video_screen/binding/update_video_screen_binding.dart';
+import 'package:moko/presentation/pages/update_video_screen/update_video_screen_page.dart';
+import 'package:moko/presentation/pages/user_video_lst/binding/user_video_lst_binding.dart';
+import 'package:moko/presentation/pages/user_video_lst/user_video_lst_screen.dart';
 
 import '../presentation/pages/edit_video_screen/edit_video_screen_page.dart';
 import '../presentation/pages/movie_detail/binding/movie_detail_screen_binding.dart';
@@ -62,9 +66,21 @@ class RoutingModule {
       transition: Transition.fadeIn, // Example animation: Fade In
     ),
     GetPage(
+      name: Routes.updateVideo,
+      page: () => UpdateVideoScreen(),
+      binding: UpdateVideoBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
       name: Routes.dashboard,
       page: () => DashBoardScreen(),
       binding: DashBoardBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
+      name: Routes.videoLst,
+      page: () => UserVideoLstScreen(),
+      binding: UserVideoLstScreenBinding(),
       transition: Transition.fadeIn, // Example animation: Fade In
     ),
     GetPage(

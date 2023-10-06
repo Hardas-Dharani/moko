@@ -41,7 +41,15 @@ class HomeScreen extends GetView<HomeController> {
               //   ),
               // ),
               controller.homeDetailData.data == null
-                  ? SizedBox()
+                  ? SizedBox(
+                      height: Get.height,
+                      child: Center(
+                        child: Text(
+                          "No data available",
+                          style: TextStyle(color: AppColors.white),
+                        ),
+                      ),
+                    )
                   : Container(
                       color: AppColors.black,
                       child: ListView.builder(

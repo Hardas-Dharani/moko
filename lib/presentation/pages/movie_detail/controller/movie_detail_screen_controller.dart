@@ -31,9 +31,15 @@ class MovieDetailController extends GetxController {
     LoadingDialog.show();
     try {
       print(Get.arguments["channel_id"]);
-      final s =
+      final result =
           await HomeRepositoryIml().getMovieDetail(Get.arguments["channel_id"]);
-      movieDetailModel = MovieDetailModel.fromJson(s);
+      if (result["status"]) {
+        Get.snackbar('Message', result["message"]);
+        movieDetailModel = MovieDetailModel.fromJson(result);
+      } else {
+        Get.snackbar('Message', result["message"]);
+      }
+
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();

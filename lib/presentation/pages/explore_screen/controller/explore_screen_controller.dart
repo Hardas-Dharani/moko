@@ -64,9 +64,14 @@ class ExploreController extends GetxController {
   getDashBoard() async {
     LoadingDialog.show();
     try {
-      final s = await HomeRepositoryIml().getDashBoard();
-      homeDetailData = HomeDetailModel.fromJson(s);
-      print(s);
+      final result = await HomeRepositoryIml().getDashBoard();
+      if (result["status"]) {
+        Get.snackbar('Message', result["message"]);
+        homeDetailData = HomeDetailModel.fromJson(result);
+      } else {
+        Get.snackbar('Message', result["message"]);
+      }
+
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();
@@ -79,15 +84,21 @@ class ExploreController extends GetxController {
   getSearch() async {
     LoadingDialog.show();
     try {
-      final s = await HomeRepositoryIml().getSearch(searchTxt.text);
-      seachModel = SeachModel.fromJson(s);
-      filteredData = seachModel.data!.result!;
-      if (seachModel.data!.languages!.isNotEmpty) {
-        selectedLanguage = seachModel.data!.languages![0];
+      final result = await HomeRepositoryIml().getSearch(searchTxt.text);
+      if (result["status"]) {
+        Get.snackbar('Message', result["message"]);
+        seachModel = SeachModel.fromJson(result);
+        filteredData = seachModel.data!.result!;
+        if (seachModel.data!.languages!.isNotEmpty) {
+          selectedLanguage = seachModel.data!.languages![0];
+        }
+        if (seachModel.data!.creators!.isNotEmpty) {
+          selectedCreator = seachModel.data!.creators![0];
+        }
+      } else {
+        Get.snackbar('Message', result["message"]);
       }
-      if (seachModel.data!.creators!.isNotEmpty) {
-        selectedCreator = seachModel.data!.creators![0];
-      }
+
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();

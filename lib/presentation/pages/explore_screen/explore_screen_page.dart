@@ -21,7 +21,15 @@ class ExploreScreen extends GetView<ExploreController> {
       endDrawer: GetBuilder<ExploreController>(builder: (_) {
         return Drawer(
           child: controller.seachModel.data == null
-              ? SizedBox()
+              ? SizedBox(
+                  height: Get.height,
+                  child: Center(
+                    child: Text(
+                      "No data available",
+                      style: TextStyle(color: AppColors.white),
+                    ),
+                  ),
+                )
               : ListView(
                   padding: EdgeInsets.zero,
                   children: <Widget>[

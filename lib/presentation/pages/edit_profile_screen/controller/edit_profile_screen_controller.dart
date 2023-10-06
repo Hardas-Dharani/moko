@@ -48,8 +48,13 @@ class EditProfileController extends GetxController {
   updateProfile() async {
     LoadingDialog.show();
     try {
-      await AuthenticationRepositoryIml()
+      final result = await AuthenticationRepositoryIml()
           .updateProfile(usrTxt.text, emailTxt.text, phnTxt.text);
+      if (result["status"]) {
+        Get.snackbar('Message', result["message"]);
+      } else {
+        Get.snackbar('Message', result["message"]);
+      }
       LoadingDialog.hide();
       update();
     } catch (e) {

@@ -11,4 +11,6 @@ class Routes {
   static String get splashScreen => '/splashScreen';
   static String get startScreen => '/StartScreen';
   static String get createrScreen => '/createrScreen';
+  static String get videoLst => '/videoLst';
+  static String get updateVideo => '/updateVideo';
 }

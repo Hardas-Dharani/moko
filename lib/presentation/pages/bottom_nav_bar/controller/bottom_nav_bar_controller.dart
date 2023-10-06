@@ -27,9 +27,14 @@ class BottomNavBarController extends GetxController {
   BottomNavigationItem get currentItem => _currentItem;
   categoryMenu() async {
     try {
-      final s = await HomeRepositoryIml().getCategory();
-      createrListMenuModel = CreaterListMenuModel.fromJson(s);
+      final result = await HomeRepositoryIml().getCategory();
 
+      if (result["status"]) {
+        Get.snackbar('Message', result["message"]);
+        createrListMenuModel = CreaterListMenuModel.fromJson(result);
+      } else {
+        Get.snackbar('Message', result["message"]);
+      }
       update();
     } catch (e) {
       rethrow;
@@ -43,8 +48,16 @@ class BottomNavBarController extends GetxController {
 
   @override
   void onInit() {
-    categoryMenu();
-    print(Get.find<LocalStorageService>().loginUser!.data!.user!.userType);
+    try {
+      if (Get.find<LocalStorageService>().loginUser!.data!.user!.userType ==
+          "User") {
+        categoryMenu();
+        print(Get.find<LocalStorageService>().loginUser!.data!.user!.userType);
+      }
+    } catch (e) {
+      rethrow;
+    }
+
     // TODO: implement onInit
     super.onInit();
   }
