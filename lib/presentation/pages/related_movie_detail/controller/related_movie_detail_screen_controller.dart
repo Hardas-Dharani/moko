@@ -8,7 +8,7 @@ import '../../../../data/repositories/home_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
-class MovieDetailController extends GetxController {
+class ReleatedMovieDetailController extends GetxController {
   TextEditingController emailTxt = TextEditingController();
   TextEditingController passTxt = TextEditingController();
   final passwordVisible = true.obs;

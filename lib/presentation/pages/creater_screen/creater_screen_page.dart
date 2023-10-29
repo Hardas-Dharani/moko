@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/common_txt.dart';
-import '../../../app/util/custom_button.dart';
 import '../../../app/util/custom_txt_field.dart';
 import '../../../app/util/util.dart';
 import '../home_screen/widget/category_movie.dart';
@@ -112,50 +111,62 @@ class CreaterScreen extends GetView<CreaterController> {
                       SizedBox(
                         height: 20,
                       ),
-                      controller.homeDetailData.data == null
-                          ? SizedBox(
-                              height: Get.height,
-                              child: Center(
-                                child: Text(
-                                  "No data available",
-                                  style: TextStyle(color: AppColors.white),
-                                ),
-                              ),
-                            )
-                          : SizedBox(
-                              height: 40,
-                              child: ListView.separated(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return CustomButton(
-                                        borderBool: true,
-                                        width: 97,
-                                        height: 40,
-                                        borderRadius: BorderRadius.circular(35),
-                                        backGroundColor:
-                                            controller.indexSelected == index
-                                                ? AppColors.blue
-                                                : AppColors.pinkColor,
-                                        onPressed: () {
-                                          controller.indexSelected = index;
-                                          controller.update();
-                                        },
-                                        child: CommonText(
-                                          text: controller.homeDetailData.data!
-                                              .creators![index].genreName!,
-                                          fontSize: 12,
-                                          color: AppColors.white,
-                                        ));
-                                  },
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                  itemCount: controller
-                                      .homeDetailData.data!.creators!.length),
-                            ),
+                      // controller.homeDetailData.data == null
+                      //     ? SizedBox(
+                      //         height: Get.height,
+                      //         child: Center(
+                      //           child: Text(
+                      //             "No data available",
+                      //             style: TextStyle(color: AppColors.white),
+                      //           ),
+                      //         ),
+                      //       )
+                      //     : SizedBox(
+                      //         height: 40,
+                      //         child: ListView.separated(
+                      //             padding: EdgeInsets.zero,
+                      //             shrinkWrap: true,
+                      //             scrollDirection: Axis.horizontal,
+                      //             itemBuilder: (context, index) {
+                      //               return Row(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.start,
+                      //                 children: [
+                      //                   CustomButton(
+                      //                       borderBool: true,
+                      //                       width: 97,
+                      //                       height: 40,
+                      //                       borderRadius:
+                      //                           BorderRadius.circular(35),
+                      //                       backGroundColor:
+                      //                           controller.indexSelected ==
+                      //                                   index
+                      //                               ? AppColors.blue
+                      //                               : AppColors.pinkColor,
+                      //                       onPressed: () {
+                      //                         controller.indexSelected = index;
+                      //                         controller.update();
+                      //                       },
+                      //                       child: CommonText(
+                      //                         text: controller
+                      //                             .homeDetailData
+                      //                             .data!
+                      //                             .creators![index]
+                      //                             .genreName!,
+                      //                         fontSize: 12,
+                      //                         color: AppColors.white,
+                      //                       )),
+                      //                 ],
+                      //               );
+                      //             },
+                      //             separatorBuilder: (context, index) =>
+                      //                 SizedBox(
+                      //                   width: 10,
+                      //                 ),
+                      //             itemCount: controller
+                      //                 .homeDetailData.data!.creators!.length),
+                      //       ),
+
                       SizedBox(
                         height: 20,
                       ),

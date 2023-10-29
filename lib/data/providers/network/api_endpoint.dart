@@ -11,6 +11,7 @@ class APIEndpoint {
   static String get home => "home";
   static String get loginUrl => "login";
   static String get middleWareUrl => '/api/v2/';
+  static String get myChannel => "content-creator/channel";
   static String get search => "search";
   static String get signupUrl => "signup";
   static String get updateProfile => "profile-update";

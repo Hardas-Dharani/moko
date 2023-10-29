@@ -32,6 +32,19 @@ class ContentCreatorRepositoryIml extends ContentCreatorRepository {
   }
 
   @override
+  Future<Map<String, dynamic>> myChannel() async {
+    try {
+      final response = await ContentCreatorApi.my_Channel().request();
+
+      final result = json.decode(response);
+      // Map<result, dynamic> authModal = LoginModel.fromJson(result);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<Map<String, dynamic>> updateVideos(
       Map<String, dynamic> jsonParser, String slug) async {
     try {

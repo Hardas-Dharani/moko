@@ -11,6 +11,7 @@ class MovieCard extends StatelessWidget {
   final double radius;
   final String channelID;
   final double width;
+  final bool releated;
   final String imageUrl; // URL of the movie poster image
 
   MovieCard(
@@ -18,6 +19,7 @@ class MovieCard extends StatelessWidget {
       required this.channelID,
       this.height = 194,
       this.radius = 8.0,
+      this.releated = false,
       this.width = 141,
       this.titleBool = false,
       required this.imageUrl});
@@ -26,7 +28,13 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.movieDetail, arguments:{"image":imageUrl,"channel_id":channelID} );
+        // if (releated) {
+        Get.toNamed(Routes.relatedMovieDetail,
+            arguments: {"image": imageUrl, "channel_id": channelID});
+        // } else {
+        //   Get.offAndToNamed(Routes.movieDetail,
+        //       arguments: {"image": imageUrl, "channel_id": channelID});
+        // }
       },
       child: Container(
         height: height,

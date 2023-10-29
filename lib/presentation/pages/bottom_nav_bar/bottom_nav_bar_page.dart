@@ -171,7 +171,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                   .data!
                                   .user!
                                   .userType ==
-                              "User" &&
+                              "Creator Dashboard" &&
                           controller.drawerItem[index]['label'] == "Creator"
                       ? ExpansionTile(
                           title: Text(
@@ -233,23 +233,18 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                         .data!.creators!.length)
                           ],
                         )
-                      // :
-                      // controller.drawerItem[index]['label'] == "Creator"
-                      : controller.drawerItem[index]['label'] == "User"
+                      : controller.drawerItem[index]['label'] == "Creator"
+                          // : controller.drawerItem[index]['label'] == "User"
                           ? SizedBox()
                           : Get.find<LocalStorageService>()
                                           .loginUser!
                                           .data!
                                           .user!
-                                          .userType !=
+                                          .userType ==
                                       "Content_Creator" &&
                                   controller.drawerItem[index]['label'] ==
-                                      "User"
-                              ? ListTile(
-                                  leading: Icon(
-                                    controller.drawerItem[index]['icon'],
-                                    color: AppColors.white,
-                                  ),
+                                      "Creator Dashboard"
+                              ? ExpansionTile(
                                   title: Text(
                                     controller.drawerItem[index]['label'],
                                     style: TextStyle(
@@ -257,18 +252,91 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                       fontSize: 18,
                                     ),
                                   ),
-                                  onTap: () {
-                                    Get.back();
+                                  childrenPadding:
+                                      EdgeInsets.only(left: 80, top: 0),
+                                  leading: Icon(
+                                    controller.drawerItem[index]['icon'],
+                                    color: AppColors.white,
+                                  ),
+                                  expandedAlignment: Alignment.topLeft,
+                                  expandedCrossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                        Get.toNamed(Routes.myChannel);
+                                      },
+                                      child: Text(
+                                        controller.creatorDashBoard[0],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                        Get.toNamed(Routes.myChannel);
+                                      },
+                                      child: Text(
+                                        controller.creatorDashBoard[1],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                        Get.toNamed(Routes.myChannel);
+                                      },
+                                      child: Text(
+                                        controller.creatorDashBoard[2],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                        Get.toNamed(Routes.myChannel);
+                                      },
+                                      child: Text(
+                                        controller.creatorDashBoard[3],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                  // onTap: () {
+                                  //   Get.back();
 
-                                    Get.toNamed(Routes.videoLst);
+                                  //   Get.toNamed(Routes.videoLst);
 
-                                    // else if (controller.drawerItem[index]['label'] ==
-                                    //     "Creater") {
-                                    //   Get.to(ExploreScreen());
-                                    // }
-                                  },
+                                  //   // else if (controller.drawerItem[index]['label'] ==
+                                  //   //     "Creater") {
+                                  //   //   Get.to(ExploreScreen());
+                                  //   // }
+                                  // },
                                 )
-                              : controller.drawerItem[index]['label'] == "User"
+                              : controller.drawerItem[index]['label'] ==
+                                      "Creator Dashboard"
                                   ? SizedBox()
                                   : ListTile(
                                       leading: Icon(

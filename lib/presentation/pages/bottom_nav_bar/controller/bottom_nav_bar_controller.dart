@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moko/data/models/creater_menu_model.dart';
 
 import '../../../../app/services/local_storage.dart';
+import '../../../../app/util/toast_message.dart';
 import '../../../../data/repositories/home_repository.dart';
 
 class BottomNavBarController extends GetxController {
@@ -10,12 +11,18 @@ class BottomNavBarController extends GetxController {
   List<Map<String, dynamic>> drawerItem = [
     {'label': 'Home', 'icon': Icons.home_outlined},
     {'label': 'Creator', 'icon': Icons.list},
-    {'label': 'User', 'icon': Icons.dashboard},
+    {'label': 'Creator Dashboard', 'icon': Icons.dashboard},
     // {'label': 'TV Shows', 'icon': Icons.tv},
     // {'label': 'Movies', 'icon': Icons.movie},
     // {'label': 'Live Streaming Profile', 'icon': Icons.live_tv},
     // {'label': 'Settings', 'icon': Icons.settings},
     {'label': 'Sign Out', 'icon': Icons.logout},
+  ];
+  List<String> creatorDashBoard = [
+    "My channel",
+    "My Videos",
+    "Upload Video",
+    "My Playlists"
   ];
   DateTime now = DateTime.now();
 
@@ -30,10 +37,10 @@ class BottomNavBarController extends GetxController {
       final result = await HomeRepositoryIml().getCategory();
 
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
         createrListMenuModel = CreaterListMenuModel.fromJson(result);
       } else {
-        Get.snackbar('Message', result["message"]);
+        // ToastMessage().toastMessae(result["message"]);;
       }
       update();
     } catch (e) {

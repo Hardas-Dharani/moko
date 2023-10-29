@@ -5,7 +5,7 @@ class ChannelAllVideos {
   int? episodeSeasonId;
   String? videoTitle;
   int? releaseDate;
-  Null duration;
+  String? duration;
   String? videoDescription;
   String? videoSlug;
   String? videoImage;
@@ -16,24 +16,24 @@ class ChannelAllVideos {
   String? videoUrl720;
   String? videoUrl1080;
   int? downloadEnable;
-  Null downloadUrl;
+  String? downloadUrl;
   int? subtitleOnOff;
-  Null subtitleLanguage1;
-  Null subtitleUrl1;
-  Null subtitleLanguage2;
-  Null subtitleUrl2;
-  Null subtitleLanguage3;
-  Null subtitleUrl3;
-  Null imdbId;
-  Null imdbRating;
-  Null imdbVotes;
+  String? subtitleLanguage1;
+  String? subtitleUrl1;
+  String? subtitleLanguage2;
+  String? subtitleUrl2;
+  String? subtitleLanguage3;
+  String? subtitleUrl3;
+  String? imdbId;
+  String? imdbRating;
+  String? imdbVotes;
   String? seoTitle;
   String? seoDescription;
   String? seoKeyword;
   int? views;
   int? status;
   int? createdBy;
-  Null createdAt;
+  String? createdAt;
   String? updatedAt;
 
   ChannelAllVideos(
@@ -178,8 +178,8 @@ class ChannelDetail {
   int? termAgreed;
   int? createdBy;
   String? testPoster;
-  List<Null>? actors;
-  List<Null>? directors;
+  List<Genres>? actors;
+  List<Genres>? directors;
   Language? language;
   List<Genres>? genres;
   int? totalPlaylist;
@@ -360,10 +360,12 @@ class MovieDetailData {
   });
 
   MovieDetailData.fromJson(Map<String, dynamic> json) {
-    channelDetail = json['channel_detail'] != null
-        ? new ChannelDetail.fromJson(json['channel_detail'])
-        : null;
-    if (json['channel_all_videos'] != null) {
+    channelDetail =
+        json['channel_detail'] != null && json['channel_detail'].isNotEmpty
+            ? new ChannelDetail.fromJson(json['channel_detail'])
+            : null;
+    if (json['channel_all_videos'] != null &&
+        json['channel_all_videos'].isNotEmpty) {
       channelAllVideos = <ChannelAllVideos>[];
       json['channel_all_videos'].forEach((v) {
         channelAllVideos!.add(new ChannelAllVideos.fromJson(v));

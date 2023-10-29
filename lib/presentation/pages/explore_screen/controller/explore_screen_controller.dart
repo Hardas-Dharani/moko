@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../app/util/toast_message.dart';
 import '../../../../app/util/loader.dart';
 import '../../../../data/models/home_detail_model.dart';
 import '../../../../data/models/search_model.dart';
@@ -66,10 +67,12 @@ class ExploreController extends GetxController {
     try {
       final result = await HomeRepositoryIml().getDashBoard();
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
         homeDetailData = HomeDetailModel.fromJson(result);
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
@@ -86,7 +89,8 @@ class ExploreController extends GetxController {
     try {
       final result = await HomeRepositoryIml().getSearch(searchTxt.text);
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
         seachModel = SeachModel.fromJson(result);
         filteredData = seachModel.data!.result!;
         if (seachModel.data!.languages!.isNotEmpty) {
@@ -96,7 +100,8 @@ class ExploreController extends GetxController {
           selectedCreator = seachModel.data!.creators![0];
         }
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);

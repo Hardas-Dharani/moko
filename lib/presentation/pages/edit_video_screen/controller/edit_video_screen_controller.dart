@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:images_picker/images_picker.dart';
 
 import '../../../../app/util/loader.dart';
+import '../../../../app/util/toast_message.dart';
 import '../../../../data/models/channel_playlst.dart';
 import '../../../../data/repositories/content_creator_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
@@ -41,12 +42,14 @@ class EditVideoController extends GetxController {
     try {
       final result = await ContentCreatorRepositoryIml().channelPlayList();
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
         channelPlayListModel = ChannelPlayListModel.fromJson(result);
         selectedChannel = channelPlayListModel.data!.channelsPlaylist!.first;
         selectedPlaylist = channelPlayListModel.data!.playlist!.first;
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       LoadingDialog.hide();
@@ -109,15 +112,17 @@ class EditVideoController extends GetxController {
         "playlist_id": selectedPlaylist.id.toString()
       });
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        Get.back();
+        ;
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
       LoadingDialog.hide();
       update();
     } catch (e) {
-      Get.find();
       LoadingDialog.hide();
       rethrow;
     }

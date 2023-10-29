@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
-        android:label="Moko"
+        android:label="YOYO"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

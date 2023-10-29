@@ -7,6 +7,7 @@ import '../../../../data/repositories/home_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
+import '../../../../app/util/toast_message.dart';
 enum buttonEnum { live, category, newest }
 
 class HomeController extends GetxController {
@@ -35,13 +36,15 @@ class HomeController extends GetxController {
     try {
       final result = await HomeRepositoryIml().getDashBoard();
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        // ToastMessage().toastMessae(result["message"]);;
         homeDetailData = HomeDetailModel.fromJson(result);
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);
+      // LoadingDialog.hide();
       LoadingDialog.hide();
       update();
     } catch (e) {

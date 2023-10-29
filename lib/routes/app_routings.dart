@@ -13,6 +13,9 @@ import 'package:moko/presentation/pages/edit_video_screen/binding/edit_video_scr
 import 'package:moko/presentation/pages/home_screen/binding/home_screen_binding.dart';
 import 'package:moko/presentation/pages/home_screen/widget/live_stream.dart';
 import 'package:moko/presentation/pages/movie_detail/movie_detail_screen_page.dart';
+import 'package:moko/presentation/pages/my_channel_screen/binding/my_channel_binding.dart';
+import 'package:moko/presentation/pages/my_channel_screen/my_channel_page.dart';
+import 'package:moko/presentation/pages/related_movie_detail/releted_movie_detail_screen_page.dart';
 import 'package:moko/presentation/pages/sign_in/binding/sign_in_binding.dart';
 import 'package:moko/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:moko/presentation/pages/sign_up/binding/sign_up_binding.dart';
@@ -24,6 +27,7 @@ import 'package:moko/presentation/pages/user_video_lst/user_video_lst_screen.dar
 
 import '../presentation/pages/edit_video_screen/edit_video_screen_page.dart';
 import '../presentation/pages/movie_detail/binding/movie_detail_screen_binding.dart';
+import '../presentation/pages/related_movie_detail/binding/related_movie_detail_screen_binding.dart';
 import '../presentation/pages/splash/splash.dart';
 import 'app_routes.dart';
 
@@ -93,6 +97,18 @@ class RoutingModule {
       name: Routes.movieDetail,
       page: () => MovieDetailScreen(),
       binding: MovieDetailBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
+      name: Routes.myChannel,
+      page: () => MyChannelScreen(),
+      binding: MyChannelBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
+      name: Routes.relatedMovieDetail,
+      page: () => ReleatedMovieDetailScreen(),
+      binding: ReleatedMovieDetailBinding(),
       transition: Transition.fadeIn, // Example animation: Fade In
     ),
     GetPage(

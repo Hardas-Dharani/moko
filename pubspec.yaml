@@ -47,7 +47,10 @@ dependencies:
   cached_network_image: ^3.2.3
   google_fonts: ^5.1.0
   flutter_spinkit: ^5.2.0
+  appinio_video_player: ^1.2.2
   images_picker: ^1.2.11
+  super_tag_editor: ^0.2.0
+  fluttertoast: ^8.2.2
   
 dev_dependencies:
   flutter_test:

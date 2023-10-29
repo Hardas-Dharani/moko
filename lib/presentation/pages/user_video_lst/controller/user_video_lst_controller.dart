@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../../app/util/loader.dart';
+import '../../../../app/util/toast_message.dart';
 import '../../../../data/models/video_list_user.dart';
 import '../../../../data/repositories/content_creator_repository.dart';
 
@@ -14,10 +15,12 @@ class UserVideoLstScreenController extends GetxController {
       final result = await ContentCreatorRepositoryIml().deleteVideo(id);
       // videoListUserModel = VideoListUserModel.fromJson(result);
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
         getVideoList();
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       LoadingDialog.hide();
@@ -33,10 +36,12 @@ class UserVideoLstScreenController extends GetxController {
     try {
       final result = await ContentCreatorRepositoryIml().videoLst();
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
         videoListUserModel = VideoListUserModel.fromJson(result);
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       LoadingDialog.hide();

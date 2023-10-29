@@ -5,9 +5,10 @@ import 'package:moko/app/util/common_txt.dart';
 import 'package:moko/app/util/custom_button.dart';
 
 import '../../../app/config/app_colors.dart';
+import '../../../app/util/custom_video_play.dart';
 import '../../../app/util/movie_card.dart';
 import '../../../app/util/util.dart';
-import 'controller/movie_detail_screen_controller.dart';
+import 'controller/related_movie_detail_screen_controller.dart';
 
 class CircleImageWithName extends StatelessWidget {
   final String imageUrl;
@@ -41,12 +42,12 @@ class CircleImageWithName extends StatelessWidget {
   }
 }
 
-class MovieDetailScreen extends GetView<MovieDetailController> {
-  MovieDetailScreen({super.key});
+class ReleatedMovieDetailScreen extends GetView<ReleatedMovieDetailController> {
+  ReleatedMovieDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MovieDetailController());
+    Get.put(ReleatedMovieDetailController());
     return Scaffold(
       // appBar: PreferredSize(
       //   preferredSize: Size(Get.width, 66),
@@ -87,7 +88,7 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
             ],
           ),
         ),
-        child: GetBuilder<MovieDetailController>(builder: (_) {
+        child: GetBuilder<ReleatedMovieDetailController>(builder: (_) {
           return Container(
             height: Get.height,
             width: Get.width,
@@ -157,19 +158,15 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
 
                                   IconButton(
                                       onPressed: () {
-                                        print(controller
-                                            .movieDetailModel
-                                            .data!
-                                            .channelAllVideos!
-                                            .first
-                                            .downloadUrl!);
-                                        // Get.to(VideoPlayerWidget(
-                                        //     videoUrl: controller
-                                        //         .movieDetailModel
-                                        //         .data!
-                                        //         .channelAllVideos!
-                                        //         .first
-                                        //         .downloadUrl!));
+                                        print(controller.movieDetailModel.data!
+                                            .channelAllVideos!.first.videoUrl!);
+                                        Get.to(VideoPlayerWidget(
+                                            videoUrl: controller
+                                                .movieDetailModel
+                                                .data!
+                                                .channelAllVideos!
+                                                .first
+                                                .videoUrl!));
                                       },
                                       icon: Icon(
                                         Icons.play_circle_outline_outlined,
@@ -605,7 +602,6 @@ class MovieDetailScreen extends GetView<MovieDetailController> {
                                       .channelAllVideos!.length,
                                   itemBuilder: (context, categoryIndex) {
                                     return MovieCard(
-                                      // releated: true,
                                       titleBool: true,
                                       channelID: controller
                                           .movieDetailModel

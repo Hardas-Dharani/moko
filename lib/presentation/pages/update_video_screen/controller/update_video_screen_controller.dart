@@ -10,6 +10,7 @@ import '../../../../data/repositories/content_creator_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
+import '../../../../app/util/toast_message.dart';
 enum buttonEnum { live, category, newest }
 
 class UpdateVideoController extends GetxController {
@@ -41,12 +42,14 @@ class UpdateVideoController extends GetxController {
     try {
       final result = await ContentCreatorRepositoryIml().channelPlayList();
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
         channelPlayListModel = ChannelPlayListModel.fromJson(result);
         selectedChannel = channelPlayListModel.data!.channelsPlaylist!.first;
         selectedPlaylist = channelPlayListModel.data!.playlist!.first;
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       LoadingDialog.hide();
@@ -109,9 +112,11 @@ class UpdateVideoController extends GetxController {
         "playlist_id": selectedPlaylist.id.toString()
       }, Get.arguments);
       if (result["status"]) {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       } else {
-        Get.snackbar('Message', result["message"]);
+        ToastMessage().toastMessae(result["message"]);
+        ;
       }
 
       // createrListMenuModel = CreaterListMenuModel.fromJson(s);

@@ -14,6 +14,7 @@ class ContentCreatorApi implements APIRequestRepresentable {
       : this._(type: ContentCreatorType.channel_playlist);
   ContentCreatorApi.deleteVideo(String slug)
       : this._(type: ContentCreatorType.deleteVideo, slug: slug);
+  ContentCreatorApi.my_Channel() : this._(type: ContentCreatorType.myChannel);
 
   ContentCreatorApi.updateVideo(Map<String, dynamic> jsonParse, String slug)
       : this._(
@@ -73,6 +74,8 @@ class ContentCreatorApi implements APIRequestRepresentable {
         return HTTPMethod.get;
       case ContentCreatorType.channel_playlist:
         return HTTPMethod.get;
+      case ContentCreatorType.myChannel:
+        return HTTPMethod.get;
       case ContentCreatorType.deleteVideo:
         return HTTPMethod.post;
       default:
@@ -95,6 +98,8 @@ class ContentCreatorApi implements APIRequestRepresentable {
         return APIEndpoint.middleWareUrl + APIEndpoint.videoLst;
       case ContentCreatorType.channel_playlist:
         return APIEndpoint.middleWareUrl + APIEndpoint.channel_play_list;
+      case ContentCreatorType.myChannel:
+        return APIEndpoint.middleWareUrl + APIEndpoint.myChannel;
 
       default:
         return "";
@@ -124,5 +129,6 @@ enum ContentCreatorType {
   deleteVideo,
   videoDetail,
   videoLst,
-  channel_playlist
+  channel_playlist,
+  myChannel
 }
