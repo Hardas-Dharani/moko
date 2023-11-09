@@ -6,6 +6,20 @@ import '../../domain/repositories/content_creator_repository.dart';
 
 class ContentCreatorRepositoryIml extends ContentCreatorRepository {
   @override
+  Future<Map<String, dynamic>> addPlayList(
+      Map<String, dynamic> jsonParser) async {
+    try {
+      final response = await ContentCreatorApi.addPlayist(jsonParser).request();
+
+      final result = json.decode(response);
+      // Map<result, dynamic> authModal = LoginModel.fromJson(result);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<Map<String, dynamic>> channelPlayList() async {
     try {
       final response = await ContentCreatorApi.channel_playlst().request();
@@ -35,6 +49,34 @@ class ContentCreatorRepositoryIml extends ContentCreatorRepository {
   Future<Map<String, dynamic>> myChannel() async {
     try {
       final response = await ContentCreatorApi.my_Channel().request();
+
+      final result = json.decode(response);
+      // Map<result, dynamic> authModal = LoginModel.fromJson(result);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> myPlayList() async {
+    try {
+      final response = await ContentCreatorApi.my_playlst().request();
+
+      final result = json.decode(response);
+      // Map<result, dynamic> authModal = LoginModel.fromJson(result);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateChannel(
+      Map<String, dynamic> jsonParser) async {
+    try {
+      final response =
+          await ContentCreatorApi.updateChannel(jsonParser).request();
 
       final result = json.decode(response);
       // Map<result, dynamic> authModal = LoginModel.fromJson(result);

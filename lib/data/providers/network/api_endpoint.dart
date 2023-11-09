@@ -12,6 +12,7 @@ class APIEndpoint {
   static String get loginUrl => "login";
   static String get middleWareUrl => '/api/v2/';
   static String get myChannel => "content-creator/channel";
+  static String get playlistURL => "content-creator/playlist/add";
   static String get search => "search";
   static String get signupUrl => "signup";
   static String get updateProfile => "profile-update";
@@ -19,4 +20,5 @@ class APIEndpoint {
   static String get uploadVideo => "content-creator/add";
   static String get videoDetail => "content-creator/edit/";
   static String get videoLst => "content-creator";
+  static String get myPlaylist => "content-creator/playlist";
 }

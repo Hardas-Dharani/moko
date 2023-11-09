@@ -3,18 +3,18 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:images_picker/images_picker.dart';
+import 'package:moko/routes/app_routes.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../app/util/loader.dart';
 import '../../../../app/util/toast_message.dart';
 import '../../../../data/models/channel_playlst.dart';
-import '../../../../data/models/my_playlist_model.dart';
+import '../../../../data/models/my_channel_model.dart';
 import '../../../../data/repositories/content_creator_repository.dart';
 import '../../../../domain/entities/auth_model.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
-enum buttonEnum { live, category, newest }
-
-class EditVideoController extends GetxController {
+class AddPlayListController extends GetxController {
   TextEditingController emailTxt = TextEditingController();
   TextEditingController usrTxt = TextEditingController();
   TextEditingController playistTxt = TextEditingController();
@@ -31,15 +31,15 @@ class EditVideoController extends GetxController {
 
   DateTime now = DateTime.now();
   ChannelsPlaylist selectedChannel = ChannelsPlaylist();
-  MyPlaylist selectedPlaylist = MyPlaylist();
+  Playlist selectedPlaylist = Playlist();
   int indexSelected = 0;
 
   bool hasNewNotification = false;
   String fireStoreId = '';
   ChannelPlayListModel channelPlayListModel = ChannelPlayListModel();
-  MyPlayListModel myPlayListModel = MyPlayListModel();
-
+  MyChannelModel myChannelModel = MyChannelModel();
   BottomNavigationItem get currentItem => _currentItem;
+
   categoryMenu() async {
     LoadingDialog.show();
     try {
@@ -49,7 +49,7 @@ class EditVideoController extends GetxController {
         ;
         channelPlayListModel = ChannelPlayListModel.fromJson(result);
         selectedChannel = channelPlayListModel.data!.channelsPlaylist!.first;
-        // selectedPlaylist = channelPlayListModel.data!.playlist!.first;
+        selectedPlaylist = channelPlayListModel.data!.playlist!.first;
       } else {
         ToastMessage().toastMessae(result["message"]);
         ;
@@ -69,6 +69,7 @@ class EditVideoController extends GetxController {
   }
 
   Future getImage() async {
+    var status = await Permission.manageExternalStorage.request();
     final res = await ImagesPicker.pick(
       count: 1,
       pickType: PickType.image,
@@ -81,28 +82,6 @@ class EditVideoController extends GetxController {
 // .path
 // .thumbPath (path for video thumb)
 // .size (kb)
-  }
-
-  getMyPlaylist() async {
-    LoadingDialog.show();
-    try {
-      final result = await ContentCreatorRepositoryIml().myPlayList();
-      if (result["status"]) {
-        ToastMessage().toastMessae(result["message"]);
-        ;
-        myPlayListModel = MyPlayListModel.fromJson(result);
-        selectedPlaylist = myPlayListModel.data!.playlist!.first;
-      } else {
-        ToastMessage().toastMessae(result["message"]);
-        ;
-      }
-
-      LoadingDialog.hide();
-      update();
-    } catch (e) {
-      LoadingDialog.hide();
-      rethrow;
-    }
   }
 
   Future getVideo() async {
@@ -119,23 +98,46 @@ class EditVideoController extends GetxController {
 // .size (kb)
   }
 
+  myChannel() async {
+    LoadingDialog.show();
+
+    try {
+      final result = await ContentCreatorRepositoryIml().myChannel();
+      // videoListUserModel = VideoListUserModel.fromJson(result);
+      if (result["status"]) {
+        ToastMessage().toastMessae(result["message"]);
+        myChannelModel = MyChannelModel.fromJson(result);
+        if (myChannelModel.data!.myChannel!.seriesName == null) {
+          Get.toNamed(Routes.myChannel);
+        }
+      } else {
+        ToastMessage().toastMessae(result["message"]);
+        ;
+      }
+
+      LoadingDialog.hide();
+      update();
+    } catch (e) {
+      LoadingDialog.hide();
+      rethrow;
+    }
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit
     categoryMenu();
-    getMyPlaylist();
+    myChannel();
     super.onInit();
   }
 
-  uploadVideo() async {
+  uploadplaylist() async {
     LoadingDialog.show();
     try {
-      final result = await ContentCreatorRepositoryIml().uploadVideos({
-        "video_title": usrTxt.text,
-        "video_thumbnail": imageThumbil,
-        "channel_id": selectedChannel.id.toString(),
-        "video_file": video,
-        "playlist_id": selectedPlaylist.id.toString()
+      final result = await ContentCreatorRepositoryIml().addPlayList({
+        "playlist_name": usrTxt.text,
+        "poster": imageThumbil,
+        "series_id": myChannelModel.data!.myChannel!.id.toString(),
       });
       if (result["status"]) {
         ToastMessage().toastMessae(result["message"]);
@@ -154,3 +156,5 @@ class EditVideoController extends GetxController {
     }
   }
 }
+
+enum buttonEnum { live, category, newest }

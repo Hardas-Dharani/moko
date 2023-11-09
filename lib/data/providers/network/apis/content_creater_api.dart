@@ -10,12 +10,17 @@ class ContentCreatorApi implements APIRequestRepresentable {
   final String? channelId;
   final String? slug;
   final Map<String, dynamic>? jsonParse;
+  ContentCreatorApi.addPlayist(Map<String, dynamic> jsonParse)
+      : this._(type: ContentCreatorType.addPlaylist, jsonParse: jsonParse);
   ContentCreatorApi.channel_playlst()
       : this._(type: ContentCreatorType.channel_playlist);
   ContentCreatorApi.deleteVideo(String slug)
       : this._(type: ContentCreatorType.deleteVideo, slug: slug);
   ContentCreatorApi.my_Channel() : this._(type: ContentCreatorType.myChannel);
+  ContentCreatorApi.my_playlst() : this._(type: ContentCreatorType.my_playlist);
 
+  ContentCreatorApi.updateChannel(Map<String, dynamic> jsonParse)
+      : this._(type: ContentCreatorType.updateChannel, jsonParse: jsonParse);
   ContentCreatorApi.updateVideo(Map<String, dynamic> jsonParse, String slug)
       : this._(
             type: ContentCreatorType.updateVideo,
@@ -39,6 +44,10 @@ class ContentCreatorApi implements APIRequestRepresentable {
         return jsonParse;
       case ContentCreatorType.updateVideo:
         return jsonParse;
+      case ContentCreatorType.addPlaylist:
+        return jsonParse;
+      case ContentCreatorType.updateChannel:
+        return jsonParse;
       default:
         return {};
     }
@@ -51,6 +60,11 @@ class ContentCreatorApi implements APIRequestRepresentable {
   Map<String, String> get headers {
     //  ;
     switch (type) {
+      case ContentCreatorType.addPlaylist:
+        return {};
+      case ContentCreatorType.updateChannel:
+        return {};
+
       default:
         return {
           // 'Authorization':
@@ -76,6 +90,12 @@ class ContentCreatorApi implements APIRequestRepresentable {
         return HTTPMethod.get;
       case ContentCreatorType.myChannel:
         return HTTPMethod.get;
+      case ContentCreatorType.my_playlist:
+        return HTTPMethod.get;
+      case ContentCreatorType.addPlaylist:
+        return HTTPMethod.post;
+      case ContentCreatorType.updateChannel:
+        return HTTPMethod.memberFormMethod;
       case ContentCreatorType.deleteVideo:
         return HTTPMethod.post;
       default:
@@ -96,11 +116,16 @@ class ContentCreatorApi implements APIRequestRepresentable {
         return APIEndpoint.middleWareUrl + APIEndpoint.videoDetail + slug!;
       case ContentCreatorType.videoLst:
         return APIEndpoint.middleWareUrl + APIEndpoint.videoLst;
+      case ContentCreatorType.addPlaylist:
+        return APIEndpoint.middleWareUrl + APIEndpoint.playlistURL;
       case ContentCreatorType.channel_playlist:
         return APIEndpoint.middleWareUrl + APIEndpoint.channel_play_list;
       case ContentCreatorType.myChannel:
         return APIEndpoint.middleWareUrl + APIEndpoint.myChannel;
-
+      case ContentCreatorType.updateChannel:
+        return APIEndpoint.middleWareUrl + APIEndpoint.myChannel;
+      case ContentCreatorType.my_playlist:
+        return APIEndpoint.middleWareUrl + APIEndpoint.myPlaylist;
       default:
         return "";
     }
@@ -125,10 +150,13 @@ class ContentCreatorApi implements APIRequestRepresentable {
 
 enum ContentCreatorType {
   uploadVideo,
+  addPlaylist,
   updateVideo,
+  updateChannel,
   deleteVideo,
   videoDetail,
   videoLst,
   channel_playlist,
+  my_playlist,
   myChannel
 }

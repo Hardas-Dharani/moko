@@ -64,68 +64,78 @@ class DashBoardScreenUser extends GetView<DashBoardScreenUserController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: 165,
-                    width: 165,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFF333333)),
-                        borderRadius: BorderRadius.circular(11)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Get.find<LocalStorageService>()
-                              .loginUser!
-                              .data!
-                              .dashboard!
-                              .totalLanguages
-                              .toString(),
-                          style: TextStyle(
-                              color: Color(0xffED008C),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Language",
-                          style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      // Get.toNamed(page);
+                    },
+                    child: Container(
+                      height: 165,
+                      width: 165,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xFF333333)),
+                          borderRadius: BorderRadius.circular(11)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Text(
+                          //   Get.find<LocalStorageService>()
+                          //       .loginUser!
+                          //       .data!
+                          //       .dashboard!
+                          //       .totalLanguages
+                          //       .toString(),
+                          //   style: TextStyle(
+                          //       color: Color(0xffED008C),
+                          //       fontSize: 18,
+                          //       fontWeight: FontWeight.bold),
+                          // ),
+                          Text(
+                            "My playlists",
+                            style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    height: 165,
-                    width: 165,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFF333333)),
-                        borderRadius: BorderRadius.circular(11)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Get.find<LocalStorageService>()
-                              .loginUser!
-                              .data!
-                              .dashboard!
-                              .totalGenres
-                              .toString(),
-                          style: TextStyle(
-                              color: Color(0xffED008C),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Genres",
-                          style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(Routes.videoLst);
+                    },
+                    child: Container(
+                      height: 165,
+                      width: 165,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xFF333333)),
+                          borderRadius: BorderRadius.circular(11)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Text(
+                          //   Get.find<LocalStorageService>()
+                          //       .loginUser!
+                          //       .data!
+                          //       .dashboard!
+                          //       .totalGenres
+                          //       .toString(),
+                          //   style: TextStyle(
+                          //       color: Color(0xffED008C),
+                          //       fontSize: 18,
+                          //       fontWeight: FontWeight.bold),
+                          // ),
+                          Text(
+                            "My Videos",
+                            style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -136,36 +146,41 @@ class DashBoardScreenUser extends GetView<DashBoardScreenUserController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: 165,
-                    width: 165,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFF333333)),
-                        borderRadius: BorderRadius.circular(11)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Get.find<LocalStorageService>()
-                              .loginUser!
-                              .data!
-                              .dashboard!
-                              .totalChannels
-                              .toString(),
-                          style: TextStyle(
-                              color: Color(0xffED008C),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Channels",
-                          style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(Routes.myChannel);
+                    },
+                    child: Container(
+                      height: 165,
+                      width: 165,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xFF333333)),
+                          borderRadius: BorderRadius.circular(11)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Text(
+                          //   Get.find<LocalStorageService>()
+                          //       .loginUser!
+                          //       .data!
+                          //       .dashboard!
+                          //       .totalChannels
+                          //       .toString(),
+                          //   style: TextStyle(
+                          //       color: Color(0xffED008C),
+                          //       fontSize: 18,
+                          //       fontWeight: FontWeight.bold),
+                          // ),
+                          Text(
+                            "Channels",
+                            style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Container(

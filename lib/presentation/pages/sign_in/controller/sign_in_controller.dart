@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/app/services/local_storage.dart';
 import 'package:moko/app/util/loader.dart';
@@ -16,15 +17,18 @@ class SignInController extends GetxController {
   login() async {
     LoadingDialog.show();
     try {
-      authModal = await AuthenticationRepositoryIml()
+      final result = await AuthenticationRepositoryIml()
           .signIn(emailTxt.text, passTxt.text);
-      if (authModal.status!) {
+
+      if (result['status']) {
+        LoginModel authModal = LoginModel.fromJson(result);
         LoadingDialog.hide();
         Get.find<LocalStorageService>().loginUser = authModal;
         print(Get.find<LocalStorageService>().loginUser!.message);
         Get.toNamed(Routes.bottomBar);
       } else {
         LoadingDialog.hide();
+        Get.snackbar("Error", result["message"]);
       }
       update();
     } catch (e) {

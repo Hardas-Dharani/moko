@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
+import 'package:moko/presentation/pages/add_playlist/add_playlist_page.dart';
+import 'package:moko/presentation/pages/add_playlist/binding/add_playlist_binding.dart';
 import 'package:moko/presentation/pages/bottom_nav_bar/binding/bottom_nav_bar_binding.dart';
 import 'package:moko/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
+// import 'package:moko/presentation/pages/change_password_screen/binding/edit_profile_screen_binding.dart';
+// import 'package:moko/presentation/pages/change_password_screen/change_password_page.dart';
 import 'package:moko/presentation/pages/creater_screen/binding/creater_screen_binding.dart';
 import 'package:moko/presentation/pages/creater_screen/creater_screen_page.dart';
 import 'package:moko/presentation/pages/dashboard_screen/binding/dashboard_screen_binding.dart';
@@ -27,6 +31,8 @@ import 'package:moko/presentation/pages/user_video_lst/user_video_lst_screen.dar
 
 import '../presentation/pages/edit_video_screen/edit_video_screen_page.dart';
 import '../presentation/pages/movie_detail/binding/movie_detail_screen_binding.dart';
+import '../presentation/pages/my_playlist_playlist/binding/my_playlist_binding.dart';
+import '../presentation/pages/my_playlist_playlist/my_playlist_page.dart';
 import '../presentation/pages/related_movie_detail/binding/related_movie_detail_screen_binding.dart';
 import '../presentation/pages/splash/splash.dart';
 import 'app_routes.dart';
@@ -97,6 +103,18 @@ class RoutingModule {
       name: Routes.movieDetail,
       page: () => MovieDetailScreen(),
       binding: MovieDetailBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
+      name: Routes.addPlayList,
+      page: () => AddPlayListScreen(),
+      binding: AddPlayListBinding(),
+      transition: Transition.fadeIn, // Example animation: Fade In
+    ),
+    GetPage(
+      name: Routes.myPlayList,
+      page: () => MyPlayListScreen(),
+      binding: MyPlayListBinding(),
       transition: Transition.fadeIn, // Example animation: Fade In
     ),
     GetPage(

@@ -1,4 +1,4 @@
-package com.example.moko
+package com.bwtech.moko
 
 import io.flutter.embedding.android.FlutterActivity
 

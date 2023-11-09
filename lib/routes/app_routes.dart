@@ -15,4 +15,7 @@ class Routes {
   static String get updateVideo => '/updateVideo';
   static String get myChannel => '/myChannel';
   static String get videoLst => '/videoLst';
+  static String get addPlayList => '/addPlayList';
+  static String get changePassword => '/changePassword';
+  static String get myPlayList => '/myPlayList';
 }

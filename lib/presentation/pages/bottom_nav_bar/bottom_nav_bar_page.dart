@@ -281,7 +281,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     GestureDetector(
                                       onTap: () {
                                         Get.back();
-                                        Get.toNamed(Routes.myChannel);
+                                        Get.toNamed(Routes.videoLst);
                                       },
                                       child: Text(
                                         controller.creatorDashBoard[1],
@@ -297,7 +297,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     GestureDetector(
                                       onTap: () {
                                         Get.back();
-                                        Get.toNamed(Routes.myChannel);
+                                        Get.toNamed(Routes.editVideoScreen);
                                       },
                                       child: Text(
                                         controller.creatorDashBoard[2],
@@ -313,7 +313,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     GestureDetector(
                                       onTap: () {
                                         Get.back();
-                                        Get.toNamed(Routes.myChannel);
+                                        Get.toNamed(Routes.myPlayList);
                                       },
                                       child: Text(
                                         controller.creatorDashBoard[3],

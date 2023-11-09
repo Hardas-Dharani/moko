@@ -50,7 +50,7 @@ class AuthAPI implements APIRequestRepresentable {
       case AuthType.updateProfile:
         return {
           'email': email,
-          'phone': phone,
+          'password': phone,
           'name': username,
         };
       default:

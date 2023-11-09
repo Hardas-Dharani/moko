@@ -28,11 +28,19 @@ class UserVideoLstScreen extends GetView<UserVideoLstScreenController> {
             fontSize: 24,
           ),
           actions: [
-            IconButton(
+            TextButton(
                 onPressed: () {
-                  Get.toNamed(Routes.dashBoardUserScreen);
+                  Get.toNamed(Routes.editVideoScreen);
                 },
-                icon: Icon(Icons.dashboard))
+                child: CommonText(
+                  text: "Upload video",
+                  color: AppColors.white,
+                )),
+            // IconButton(
+            //     onPressed: () {
+
+            //     },
+            //     icon: Icon(Icons.dashboard))
           ],
           flexibleSpace: Container(
             decoration: BoxDecoration(

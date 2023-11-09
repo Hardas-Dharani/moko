@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moko/app/util/common_txt.dart';
-import 'package:moko/data/models/my_playlist_model.dart';
 
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/custom_button.dart';
-import 'controller/edit_video_screen_controller.dart';
+import 'controller/add_playlist_controller.dart';
 
-class EditVideoScreen extends GetView<EditVideoController> {
-  EditVideoScreen({super.key});
+class AddPlayListScreen extends GetView<AddPlayListController> {
+  AddPlayListScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    Get.put(EditVideoController());
+    Get.put(AddPlayListController());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(Get.width, 66),
@@ -22,7 +21,7 @@ class EditVideoScreen extends GetView<EditVideoController> {
               },
               icon: Icon(Icons.arrow_back_ios)),
           title: CommonText(
-            text: "Edit Video",
+            text: "Add Playlist",
             weight: FontWeight.bold,
             color: AppColors.white,
             fontSize: 24,
@@ -42,7 +41,7 @@ class EditVideoScreen extends GetView<EditVideoController> {
       backgroundColor: AppColors.black.withOpacity(0.9),
 
       // backgroundColor: AppColors.lightPurple.withOpacity(0.9),
-      body: GetBuilder<EditVideoController>(builder: (_) {
+      body: GetBuilder<AddPlayListController>(builder: (_) {
         return controller.channelPlayListModel.data == null
             ? SizedBox(
                 height: Get.height,
@@ -96,7 +95,7 @@ class EditVideoScreen extends GetView<EditVideoController> {
 
                       SizedBox(height: 30),
                       CommonText(
-                        text: "Video Title :-",
+                        text: "Playlist Title :-",
                         color: AppColors.white,
                         weight: FontWeight.bold,
                         fontSize: 14,
@@ -107,7 +106,7 @@ class EditVideoScreen extends GetView<EditVideoController> {
                             color: AppColors.white.withOpacity(0.5),
                             fontSize: 12),
                         decoration: InputDecoration(
-                          hintText: 'Enter Your Video Title',
+                          hintText: 'Enter Your Playlist Title',
                           hintStyle: TextStyle(
                               color: AppColors.white.withOpacity(0.5),
                               fontSize: 12),
@@ -130,7 +129,7 @@ class EditVideoScreen extends GetView<EditVideoController> {
                       ),
                       SizedBox(height: 16),
                       CommonText(
-                        text: "Video Thumbnail :-",
+                        text: "Playlist Poster :-",
                         color: AppColors.white,
                         weight: FontWeight.bold,
                         fontSize: 14,
@@ -233,109 +232,106 @@ class EditVideoScreen extends GetView<EditVideoController> {
 
                       // SizedBox(height: 16),
                       // SizedBox(height: 16),
-                      CommonText(
-                        text: "Playlist :-",
-                        color: AppColors.white,
-                        weight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                      controller.myPlayListModel.data == null
-                          ? SizedBox()
-                          : DropdownButtonFormField<MyPlaylist>(
-                              value: controller
-                                  .selectedPlaylist, // Define a variable to hold the selected channel
-                              onChanged: (MyPlaylist? newValue) {
-                                // Add a function to handle when a new channel is selected
+                      // CommonText(
+                      //   text: "Playlist :-",
+                      //   color: AppColors.white,
+                      //   weight: FontWeight.bold,
+                      //   fontSize: 14,
+                      // ),
+                      // DropdownButtonFormField<Playlist>(
+                      //   value: controller
+                      //       .selectedPlaylist, // Define a variable to hold the selected channel
+                      //   onChanged: (Playlist? newValue) {
+                      //     // Add a function to handle when a new channel is selected
 
-                                controller.selectedPlaylist = newValue!;
-                                controller.update();
-                              },
-                              items: controller.myPlayListModel.data!.playlist!
-                                  .map<DropdownMenuItem<MyPlaylist>>(
-                                      (MyPlaylist? value) {
-                                // Define the dropdown items based on your channel data
-                                return DropdownMenuItem<MyPlaylist>(
-                                  value: value,
-                                  child: Text(
-                                    value!.seasonName.toString(),
-                                    style: TextStyle(
-                                      color: AppColors.white.withOpacity(0.5),
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                              dropdownColor: Colors.black,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontSize: 12,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: 'Select Channels',
-                                hintStyle: TextStyle(
-                                  color: AppColors.white.withOpacity(0.5),
-                                  fontSize: 12,
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppColors.txtGrey,
-                                  ),
-                                ),
-                                disabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppColors.txtGrey,
-                                  ),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppColors.txtGrey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                      SizedBox(height: 16),
+                      //     controller.selectedPlaylist = newValue!;
+                      //     controller.update();
+                      //   },
+                      //   items: controller.channelPlayListModel.data!.playlist!
+                      //       .map<DropdownMenuItem<Playlist>>((Playlist? value) {
+                      //     // Define the dropdown items based on your channel data
+                      //     return DropdownMenuItem<Playlist>(
+                      //       value: value,
+                      //       child: Text(
+                      //         value!.playlistName.toString(),
+                      //         style: TextStyle(
+                      //           color: AppColors.white.withOpacity(0.5),
+                      //           fontSize: 12,
+                      //         ),
+                      //       ),
+                      //     );
+                      //   }).toList(),
+                      //   dropdownColor: Colors.black,
+                      //   style: TextStyle(
+                      //     color: AppColors.black,
+                      //     fontSize: 12,
+                      //   ),
+                      //   decoration: InputDecoration(
+                      //     hintText: 'Select Channels',
+                      //     hintStyle: TextStyle(
+                      //       color: AppColors.white.withOpacity(0.5),
+                      //       fontSize: 12,
+                      //     ),
+                      //     enabledBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //         color: AppColors.txtGrey,
+                      //       ),
+                      //     ),
+                      //     disabledBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //         color: AppColors.txtGrey,
+                      //       ),
+                      //     ),
+                      //     focusedBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //         color: AppColors.txtGrey,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       // SizedBox(height: 16),
-                      CommonText(
-                        text: "Video File :-",
-                        color: AppColors.white,
-                        weight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                      TextFormField(
-                        onTap: () {
-                          controller.getVideo();
-                        },
-                        controller: controller.videoTxt,
-                        style: TextStyle(
-                            color: AppColors.white.withOpacity(0.5),
-                            fontSize: 12),
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.upload,
-                            color: AppColors.white,
-                            size: 15,
-                          ),
-                          hintText: 'Select Video File',
-                          hintStyle: TextStyle(
-                              color: AppColors.white.withOpacity(0.5),
-                              fontSize: 12),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColors
-                                    .txtGrey), // Set the color to white
-                          ),
-                          disabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColors
-                                    .txtGrey), // Set the color to white
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColors
-                                    .txtGrey), // Set the color to white
-                          ),
-                        ),
-                      ),
+                      // SizedBox(height: 16),
+                      // CommonText(
+                      //   text: "Video File :-",
+                      //   color: AppColors.white,
+                      //   weight: FontWeight.bold,
+                      //   fontSize: 14,
+                      // ),
+                      // TextFormField(
+                      //   onTap: () {
+                      //     controller.getVideo();
+                      //   },
+                      //   controller: controller.videoTxt,
+                      //   style: TextStyle(
+                      //       color: AppColors.white.withOpacity(0.5),
+                      //       fontSize: 12),
+                      //   decoration: InputDecoration(
+                      //     suffixIcon: Icon(
+                      //       Icons.upload,
+                      //       color: AppColors.white,
+                      //       size: 15,
+                      //     ),
+                      //     hintText: 'Select Video File',
+                      //     hintStyle: TextStyle(
+                      //         color: AppColors.white.withOpacity(0.5),
+                      //         fontSize: 12),
+                      //     enabledBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //           color: AppColors
+                      //               .txtGrey), // Set the color to white
+                      //     ),
+                      //     disabledBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //           color: AppColors
+                      //               .txtGrey), // Set the color to white
+                      //     ),
+                      //     focusedBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //           color: AppColors
+                      //               .txtGrey), // Set the color to white
+                      //     ),
+                      //   ),
+                      // ),
 
                       // CommonText(
                       //   text: "Country :-",
@@ -371,11 +367,10 @@ class EditVideoScreen extends GetView<EditVideoController> {
                           height: 55,
                           backGroundColor: AppColors.pinkColor,
                           onPressed: () {
-                            if (controller.usrTxt.text.isNotEmpty &&
-                                controller.video != null &&
-                                controller.imageThumbil != null) {
-                              controller.uploadVideo();
-                            }
+                            // if (controller.usrTxt.text.isNotEmpty &&
+                            //     controller.imageThumbil != null) {
+                            controller.uploadplaylist();
+                            // }
 
                             // controller.updateProfile();
                           },

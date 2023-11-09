@@ -14,6 +14,7 @@ class EditProfileController extends GetxController {
   TextEditingController emailTxt = TextEditingController();
   TextEditingController usrTxt = TextEditingController();
   TextEditingController phnTxt = TextEditingController();
+  TextEditingController confpwsTxt = TextEditingController();
   final passwordVisible = true.obs;
   final formKey = GlobalKey<FormState>();
   AuthModal authModal = AuthModal();

@@ -148,7 +148,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 ),
                 SizedBox(height: 16),
                 CommonText(
-                  text: "Phone :-",
+                  text: "Password :-",
                   color: AppColors.white,
                   weight: FontWeight.bold,
                   fontSize: 14,
@@ -158,7 +158,36 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   style: TextStyle(
                       color: AppColors.white.withOpacity(0.5), fontSize: 12),
                   decoration: InputDecoration(
-                    hintText: '+1 123 456 7898',
+                    hintText: '*********',
+                    hintStyle: TextStyle(
+                        color: AppColors.white.withOpacity(0.5), fontSize: 12),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                    disabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.txtGrey), // Set the color to white
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                CommonText(
+                  text: "Confirm Password :-",
+                  color: AppColors.white,
+                  weight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                TextFormField(
+                  controller: controller.confpwsTxt,
+                  style: TextStyle(
+                      color: AppColors.white.withOpacity(0.5), fontSize: 12),
+                  decoration: InputDecoration(
+                    hintText: '*********',
                     hintStyle: TextStyle(
                         color: AppColors.white.withOpacity(0.5), fontSize: 12),
                     enabledBorder: UnderlineInputBorder(
@@ -210,12 +239,31 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     height: 55,
                     backGroundColor: AppColors.pinkColor,
                     onPressed: () {
-                      controller.updateProfile();
+                      if (controller.phnTxt.text.toLowerCase() ==
+                          controller.confpwsTxt.text.toLowerCase()) {
+                        controller.updateProfile();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Password not match")));
+                      }
                     },
                     child: CommonText(
                       text: "Save Changes",
                       color: AppColors.white,
                     )),
+                // SizedBox(height: 20),
+                // Center(
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Get.toNamed(Routes.changePassword);
+                //     },
+                //     child: CommonText(
+                //       text: "Change Password",
+                //       fontSize: 18,
+                //       color: AppColors.white,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),
