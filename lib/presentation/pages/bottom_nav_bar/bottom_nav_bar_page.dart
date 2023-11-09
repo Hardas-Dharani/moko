@@ -5,6 +5,7 @@ import 'package:moko/app/services/local_storage.dart';
 import 'package:moko/presentation/pages/explore_screen/explore_screen_page.dart';
 import 'package:moko/routes/app_routes.dart';
 
+import '../../../app/util/toast_message.dart';
 import '../../../app/util/util.dart';
 import '../edit_profile_screen/controller/edit_profile_screen_controller.dart';
 import '../edit_profile_screen/edit_profile_screen_page.dart';
@@ -265,7 +266,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     GestureDetector(
                                       onTap: () {
                                         Get.back();
-                                        Get.toNamed(Routes.myChannel);
+                                        Get.toNamed(Routes.dashBoardUserScreen);
                                       },
                                       child: Text(
                                         controller.creatorDashBoard[0],
@@ -281,7 +282,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     GestureDetector(
                                       onTap: () {
                                         Get.back();
-                                        Get.toNamed(Routes.videoLst);
+                                        Get.toNamed(Routes.myChannel);
                                       },
                                       child: Text(
                                         controller.creatorDashBoard[1],
@@ -297,10 +298,32 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                     GestureDetector(
                                       onTap: () {
                                         Get.back();
-                                        Get.toNamed(Routes.editVideoScreen);
+                                        Get.toNamed(Routes.videoLst);
                                       },
                                       child: Text(
                                         controller.creatorDashBoard[2],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (controller.myChannelModel.data !=
+                                            null) {
+                                          Get.back();
+                                          Get.toNamed(Routes.editVideoScreen);
+                                        } else {
+                                          ToastMessage().toastMessae(
+                                              "First Create Channel");
+                                        }
+                                      },
+                                      child: Text(
+                                        controller.creatorDashBoard[3],
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -316,7 +339,7 @@ class BottomNavBarScreen extends GetView<BottomNavBarController> {
                                         Get.toNamed(Routes.myPlayList);
                                       },
                                       child: Text(
-                                        controller.creatorDashBoard[3],
+                                        controller.creatorDashBoard[4],
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,

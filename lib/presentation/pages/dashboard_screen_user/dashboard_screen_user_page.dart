@@ -6,6 +6,7 @@ import 'package:moko/routes/app_routes.dart';
 import '../../../app/config/app_colors.dart';
 import '../../../app/util/common_txt.dart';
 import '../../../app/util/custom_button.dart';
+import '../../../app/util/toast_message.dart';
 import 'controller/dashboard_screen_user_controller.dart';
 
 class DashBoardScreenUser extends GetView<DashBoardScreenUserController> {
@@ -64,120 +65,35 @@ class DashBoardScreenUser extends GetView<DashBoardScreenUserController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Get.toNamed(page);
-                    },
-                    child: Container(
-                      height: 165,
-                      width: 165,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFF333333)),
-                          borderRadius: BorderRadius.circular(11)),
-                      child: Column(
+                  Container(
+                    height: 165,
+                    width: 165,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xFF333333)),
+                        borderRadius: BorderRadius.circular(11)),
+                    child: CustomButton(
+                      width: 130,
+                      height: 30,
+                      borderBool: true,
+                      backGroundColor: AppColors.pinkColor,
+                      gradient: LinearGradient(
+                          colors: [AppColors.pinkColor, AppColors.pinkColor]),
+                      onPressed: () async {
+                        Get.toNamed(Routes.myPlayList);
+                        // controller.login();
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Text(
-                          //   Get.find<LocalStorageService>()
-                          //       .loginUser!
-                          //       .data!
-                          //       .dashboard!
-                          //       .totalLanguages
-                          //       .toString(),
-                          //   style: TextStyle(
-                          //       color: Color(0xffED008C),
-                          //       fontSize: 18,
-                          //       fontWeight: FontWeight.bold),
-                          // ),
                           Text(
-                            "My playlists",
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.videoLst);
-                    },
-                    child: Container(
-                      height: 165,
-                      width: 165,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFF333333)),
-                          borderRadius: BorderRadius.circular(11)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Text(
-                          //   Get.find<LocalStorageService>()
-                          //       .loginUser!
-                          //       .data!
-                          //       .dashboard!
-                          //       .totalGenres
-                          //       .toString(),
-                          //   style: TextStyle(
-                          //       color: Color(0xffED008C),
-                          //       fontSize: 18,
-                          //       fontWeight: FontWeight.bold),
-                          // ),
-                          Text(
-                            "My Videos",
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.myChannel);
-                    },
-                    child: Container(
-                      height: 165,
-                      width: 165,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFF333333)),
-                          borderRadius: BorderRadius.circular(11)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Text(
-                          //   Get.find<LocalStorageService>()
-                          //       .loginUser!
-                          //       .data!
-                          //       .dashboard!
-                          //       .totalChannels
-                          //       .toString(),
-                          //   style: TextStyle(
-                          //       color: Color(0xffED008C),
-                          //       fontSize: 18,
-                          //       fontWeight: FontWeight.bold),
-                          // ),
-                          Text(
-                            "Channels",
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
+                            'My Playlist',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          Icon(
+                            Icons.upload,
+                            size: 12,
                           )
                         ],
                       ),
@@ -198,7 +114,87 @@ class DashBoardScreenUser extends GetView<DashBoardScreenUserController> {
                       gradient: LinearGradient(
                           colors: [AppColors.pinkColor, AppColors.pinkColor]),
                       onPressed: () async {
-                        Get.toNamed(Routes.editVideoScreen);
+                        Get.toNamed(Routes.videoLst);
+                        // controller.login();
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'My video',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          Icon(
+                            Icons.upload,
+                            size: 12,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 165,
+                    width: 165,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xFF333333)),
+                        borderRadius: BorderRadius.circular(11)),
+                    child: CustomButton(
+                      width: 130,
+                      height: 30,
+                      borderBool: true,
+                      backGroundColor: AppColors.pinkColor,
+                      gradient: LinearGradient(
+                          colors: [AppColors.pinkColor, AppColors.pinkColor]),
+                      onPressed: () async {
+                        Get.toNamed(Routes.myChannel);
+                        // controller.login();
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'My channel',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          Icon(
+                            Icons.upload,
+                            size: 12,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 165,
+                    width: 165,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xFF333333)),
+                        borderRadius: BorderRadius.circular(11)),
+                    child: CustomButton(
+                      width: 130,
+                      height: 30,
+                      borderBool: true,
+                      backGroundColor: AppColors.pinkColor,
+                      gradient: LinearGradient(
+                          colors: [AppColors.pinkColor, AppColors.pinkColor]),
+                      onPressed: () async {
+                        if (controller.myChannelModel.data != null) {
+                          Get.toNamed(Routes.editVideoScreen);
+                        } else {
+                          ToastMessage().toastMessae("First Create Channel");
+                        }
                         // controller.login();
                       },
                       child: Row(

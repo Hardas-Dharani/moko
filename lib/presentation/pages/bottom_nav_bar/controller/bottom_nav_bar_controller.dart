@@ -4,6 +4,8 @@ import 'package:moko/data/models/creater_menu_model.dart';
 
 import '../../../../app/services/local_storage.dart';
 import '../../../../app/util/toast_message.dart';
+import '../../../../data/models/my_channel_model.dart';
+import '../../../../data/repositories/content_creator_repository.dart';
 import '../../../../data/repositories/home_repository.dart';
 
 class BottomNavBarController extends GetxController {
@@ -19,6 +21,7 @@ class BottomNavBarController extends GetxController {
     {'label': 'Sign Out', 'icon': Icons.logout},
   ];
   List<String> creatorDashBoard = [
+    "Dashboard",
     "My channel",
     "My Videos",
     "Upload Video",
@@ -31,7 +34,9 @@ class BottomNavBarController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   CreaterListMenuModel createrListMenuModel = CreaterListMenuModel();
+  MyChannelModel myChannelModel = MyChannelModel();
   BottomNavigationItem get currentItem => _currentItem;
+
   categoryMenu() async {
     try {
       final result = await HomeRepositoryIml().getCategory();
@@ -53,6 +58,24 @@ class BottomNavBarController extends GetxController {
     update();
   }
 
+  myChannel() async {
+    try {
+      final result = await ContentCreatorRepositoryIml().myChannel();
+      // videoListUserModel = VideoListUserModel.fromJson(result);
+      if (result["status"]) {
+        ToastMessage().toastMessae(result["message"]);
+        myChannelModel = MyChannelModel.fromJson(result);
+      } else {
+        ToastMessage().toastMessae(result["message"]);
+        ;
+      }
+
+      update();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   void onInit() {
     try {
@@ -64,7 +87,7 @@ class BottomNavBarController extends GetxController {
     } catch (e) {
       rethrow;
     }
-
+    myChannel();
     // TODO: implement onInit
     super.onInit();
   }
