@@ -23,6 +23,8 @@ class MyPlayListController extends GetxController {
   TextEditingController playistTxt = TextEditingController();
   TextEditingController videoTxt = TextEditingController();
   TextEditingController thumbnailTxt = TextEditingController();
+  //-- this btn for ads skip
+  RxBool Ads_open = true.obs;
   // TextEditingController phnTxt = TextEditingController();
   final passwordVisible = true.obs;
   final formKey = GlobalKey<FormState>();
@@ -71,7 +73,7 @@ class MyPlayListController extends GetxController {
         ToastMessage().toastMessae(result["message"]);
         ;
         myPlayListModel = MyPlayListModel.fromJson(result);
-       } else {
+      } else {
         ToastMessage().toastMessae(result["message"]);
         ;
       }
@@ -90,6 +92,4 @@ class MyPlayListController extends GetxController {
     getMyPlaylist();
     super.onInit();
   }
-
-
 }

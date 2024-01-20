@@ -1,5 +1,8 @@
-import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:moko/app/util/adsvideoScreen.dart';
+import 'package:moko/presentation/pages/my_playlist_playlist/controller/myplaylist_controller.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
@@ -15,6 +18,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget>
   VideoPlayerController? _videoPlayerController;
   CustomVideoPlayerController? _customVideoPlayerController;
   bool _isInitialized = false;
+  final controller = Get.put(MyPlayListController());
 
   @override
   bool get wantKeepAlive => true;
@@ -22,47 +26,62 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return _isInitialized
-        ? CustomVideoPlayer(
-            customVideoPlayerController: _customVideoPlayerController!,
-          )
-        : const Center(
-            child: CircularProgressIndicator(),
-          );
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Obx(
+        () => controller.Ads_open.value
+            ? adsScreen(
+                videoUrl: 'https://blindsidebets.com/soft-drink.mp4',
+                onTap: () {
+                  print('asddsdasdasfddfd');
+                  controller.Ads_open.value = false;
+                },
+              )
+            : _isInitialized
+                ? CustomVideoPlayer(
+                    customVideoPlayerController: _customVideoPlayerController!,
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+      ),
+    );
+  }
+
+  Future<bool> _onWillPop() async {
+    if (_videoPlayerController?.value.isPlaying ?? false) {
+      _pauseVideo();
+      controller.Ads_open.value = true;
+      return false;
+    }
+    return true;
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       _pauseVideo();
+      controller.Ads_open.value = true;
     } else if (state == AppLifecycleState.inactive) {
       _pauseVideo();
+      controller.Ads_open.value = true;
     } else if (state == AppLifecycleState.detached) {
       _pauseVideo();
+      controller.Ads_open.value = true;
     }
   }
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
-    // _customVideoPlayerController?.dispose();
-    // _videoPlayerController?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     _videoPlayerController?.pause();
+    controller.Ads_open.value = true;          
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    // if (!_isInitialized) {
-    //   _initializeVideo();
-    // }
     _initializeVideo();
     WidgetsBinding.instance.addObserver(this);
   }
@@ -75,7 +94,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget>
       setState(() {
         _isInitialized = true;
       });
-      // ignore: use_build_context_synchronously
+
       _customVideoPlayerController = CustomVideoPlayerController(
         context: context,
         videoPlayerController: _videoPlayerController!..setLooping(true),
@@ -83,7 +102,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget>
           showDurationPlayed: false,
           showDurationRemaining: false,
           playbackSpeedButtonAvailable: true,
-          // enterFullscreenOnStart: true,
           settingsButtonAvailable: false,
         ),
       );
